@@ -72,13 +72,13 @@ export default function Navbar() {
         <div className="desktop:col-start-12 tablet:col-start-10 col-start-6 col-span-2 flex justify-end gap-3">
           <Link
             className={` ${pathname.includes("/shop") ? "italic" : "not-italic"}`}
-            href="/info"
+            href="/shop"
           >
             Shop
           </Link>
           <Link
             className={`${pathname.includes("/cart") ? "italic" : "not-italic"}`}
-            href="/book"
+            href="/cart"
           >
             Cart
           </Link>
