@@ -40,5 +40,5 @@ body {
 }
 
 html {
-  overscroll-behavior: none;
+  scroll-behavior: smooth;
 }

@@ -7,7 +7,7 @@ import HomeImgType from "@/types/homepage";
 
 export const HOMEIMG_QUERY = defineQuery(`*[
     _type == "homepage"
-  ] | order(orderRank) {_id, title, thumbnail, slug}`);
+  ] | order(orderRank) {_id, title, thumbnail}`);
 
 // Fonction pour récupérer les projets (Serveur)
 export async function getHomeImg(): Promise<HomeImgType[]> {
