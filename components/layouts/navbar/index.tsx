@@ -20,25 +20,25 @@ export default function Navbar() {
           </Link>
           <div className="flex pt-2 gap-1">
             <Link
-              className={`${pathname.includes("/personnal") ? "italic" : "not-italic"}`}
+              className={`${pathname.includes("/personnal") ? "italic" : "not-italic"} hover:italic hover:desktop:text-[20.8px] hover:laptop:text-[14.5px]`}
               href={"/personnal"}
             >
               Personal,
             </Link>
             <Link
-              className={`${pathname.includes("/commissioned") ? "italic" : "not-italic"}`}
+              className={`${pathname.includes("/commissioned") ? "italic" : "not-italic"} hover:italic hover:desktop:text-[21.65px] hover:laptop:text-[15.2px]`}
               href={"/commissioned"}
             >
               Commissioned,
             </Link>
             <Link
-              className={`${pathname.includes("/news") ? "italic" : "not-italic"}`}
+              className={`${pathname.includes("/news") ? "italic" : "not-italic"} hover:italic hover:desktop:text-[21.55px] hover:laptop:text-[15.1px]`}
               href={"/news"}
             >
               News,
             </Link>
             <Link
-              className={`${pathname.includes("/about") ? "italic" : "not-italic"}`}
+              className={`${pathname.includes("/about") ? "italic" : "not-italic"} hover:italic hover:desktop:text-[21px] hover:laptop:text-[15px]`}
               href={"/about"}
             >
               About
@@ -71,13 +71,13 @@ export default function Navbar() {
 
         <div className="desktop:col-start-12 tablet:col-start-10 col-start-6 col-span-2 flex justify-end gap-3">
           <Link
-            className={` ${pathname.includes("/shop") ? "italic" : "not-italic"}`}
+            className={` ${pathname.includes("/shop") ? "italic" : "not-italic"} hover:italic`}
             href="/shop"
           >
             Shop
           </Link>
           <Link
-            className={`${pathname.includes("/cart") ? "italic" : "not-italic"}`}
+            className={`${pathname.includes("/cart") ? "italic" : "not-italic"} hover:italic hover:desktop:text-[18.7px] hover:laptop:text-[13.18px]`}
             href="/cart"
           >
             Cart

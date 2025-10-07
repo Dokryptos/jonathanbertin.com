@@ -27,7 +27,7 @@ export const MobileHomeComponent = ({ homeData }: HomeDataProps) => {
         key={homeData[indexImg]._id}
         asset={homeData[indexImg].thumbnail.asset._ref}
         alt={homeData[indexImg].title}
-        className="object-contain col-span-full tablet:col-span-6 tablet:col-start-3"
+        className="object-contain col-span-full tablet:col-span-6 tablet:col-start-3 "
       />
     </Grid>
   );
