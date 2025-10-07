@@ -9,5 +9,6 @@ export interface SanityImage {
 
 export default interface Home {
   _id: string;
-  gallery: SanityImage[];
+  title: string;
+  thumbnail: SanityImage;
 }

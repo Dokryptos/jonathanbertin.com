@@ -1,5 +1,5 @@
-import { defineField, defineType, defineArrayMember } from "sanity";
-import { ArchiveIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
+import { ImageIcon } from "@sanity/icons";
 import {
   orderRankField,
   orderRankOrdering,
@@ -9,7 +9,7 @@ export const homepageType = defineType({
   name: "homepage",
   title: "Homepage",
   type: "document",
-  icon: ArchiveIcon,
+  icon: ImageIcon,
   orderings: [orderRankOrdering],
   fieldsets: [
     {
@@ -21,24 +21,25 @@ export const homepageType = defineType({
     },
   ],
   fields: [
-    orderRankField({ type: "home" }),
+    orderRankField({ type: "homepage" }),
     defineField({
-      name: "gallery",
-      title: "gallery",
-      type: "array",
-      description:
-        "Select all the image you want to render, in Webp for keep the place on the CMS and keep the CMS available with the free version (Obligation) with 1 image",
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "The title of the project (not an obligation)",
+    }),
+    defineField({
+      name: "thumbnail",
+      title: "Thumbnail",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
       validation: (rule) =>
-        rule.required().error(`Required to generate a page on the website`),
-      of: [
-        defineArrayMember({
-          type: "image",
-          name: "image",
-          options: {
-            hotspot: true,
-          },
-        }),
-      ],
+        rule.required().error(`Required to generate a page on the homepage`),
+
+      description:
+        "The image use for the presentation Homepage animation (Obligation)",
     }),
   ],
 });

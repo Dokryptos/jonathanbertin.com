@@ -13,7 +13,7 @@ export const structure: StructureResolver = (S, context) =>
         context,
       }),
       orderableDocumentListDeskItem({
-        type: "home",
+        type: "homepage",
         title: "Homepage",
         S,
         context,

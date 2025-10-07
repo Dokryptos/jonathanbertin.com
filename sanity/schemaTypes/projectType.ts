@@ -74,5 +74,13 @@ export const projectType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
+      description: "The descritpion of the art (Obligation)",
+    }),
   ],
 });
