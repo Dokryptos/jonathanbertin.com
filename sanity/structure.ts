@@ -7,14 +7,26 @@ export const structure: StructureResolver = (S, context) =>
     .title("Content")
     .items([
       orderableDocumentListDeskItem({
-        type: "project",
-        title: "Project",
+        type: "commissioned",
+        title: "Commissioned",
         S,
         context,
       }),
       orderableDocumentListDeskItem({
         type: "homepage",
         title: "Homepage",
+        S,
+        context,
+      }),
+      orderableDocumentListDeskItem({
+        type: "news",
+        title: "News",
+        S,
+        context,
+      }),
+      orderableDocumentListDeskItem({
+        type: "personal",
+        title: "Personal",
         S,
         context,
       }),

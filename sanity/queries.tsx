@@ -18,37 +18,37 @@ export async function getHomeImg(): Promise<HomeImgType[]> {
   return data;
 }
 
-export const STILLLIFE_QUERY = defineQuery(`*[
-  _type == "stillLife"
-] | order(orderRank) {_id, title, thumbnail, slug, categorie, gallery}
+export const COMMISSIONED_QUERY = defineQuery(`*[
+  _type == "commissioned"
+] | order(orderRank) {_id, title, thumbnail, slug, categorie, gallery, description}
  `);
 
-export async function getAllStillLife(): Promise<ProjectType[]> {
-  const { data } = await sanityFetch({ query: STILLLIFE_QUERY });
+export async function getAllCommissioned(): Promise<ProjectType[]> {
+  const { data } = await sanityFetch({ query: COMMISSIONED_QUERY });
   if (!data) {
     notFound();
   }
   return data;
 }
 
-export const ALL_FILM_QUERY = defineQuery(`*[
-  _type == "film"
-] | order(orderRank) {_id, title,  thumbnail, slug, categorie, gallery}`);
+export const PERSONAL_QUERY = defineQuery(`*[
+  _type == "personal"
+] | order(orderRank) {_id, title,  thumbnail, slug, categorie, gallery, description}`);
 
-export async function getAllFilm(): Promise<ProjectType[]> {
-  const { data } = await sanityFetch({ query: ALL_FILM_QUERY });
+export async function getAllPersonal(): Promise<ProjectType[]> {
+  const { data } = await sanityFetch({ query: PERSONAL_QUERY });
   if (!data) {
     notFound();
   }
   return data;
 }
 
-export const ALL_ART_QUERY = defineQuery(`*[
-  _type == "art"
+export const NEWS_QUERY = defineQuery(`*[
+  _type == "news"
 ] | order(orderRank) {_id, title, thumbnail, slug, gallery, description}`);
 
 export async function getAllArt(): Promise<ProjectType[]> {
-  const { data } = await sanityFetch({ query: ALL_ART_QUERY });
+  const { data } = await sanityFetch({ query: NEWS_QUERY });
   if (!data) {
     notFound();
   }

@@ -35,6 +35,7 @@ export const LaptopHomeComponent = ({ homeData }: HomeDataProps) => {
       }
     });
   }, [homeData, preloadingKey]);
+
   return (
     <>
       <Grid className="hidden laptop:grid pr-5 pl-5 h-dvh">
