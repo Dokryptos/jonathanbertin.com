@@ -15,7 +15,9 @@ export default function Navbar() {
     >
       <Grid>
         <div className="col-start-1 laptop:col-span-6 tablet:col-span-4 col-span-3">
-          <Link href="/">Jonathan Bertin</Link>
+          <Link className="font-bagossTrial" href="/">
+            Jonathan Bertin
+          </Link>
           <div className="flex pt-2 gap-1">
             <Link
               className={`${pathname.includes("/personnal") ? "italic" : "not-italic"}`}

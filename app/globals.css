@@ -8,6 +8,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@theme inline {
+  --font-junicode: var(--font-junicode);
+  --font-bagossTrial: var(--font-bagossTrial);
   --breakpoint-tablet: 640px;
   --breakpoint-laptop: 1024px;
   --breakpoint-desktop: 1440px;

@@ -1,18 +1,34 @@
 import type { Metadata } from "next";
 import { ViewModeProvider } from "@/context/ViewModeContext";
-
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const junicode = localFont({
+  src: [
+    {
+      path: "../font/Junicode.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../font/Junicode-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-junicode",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const bagossTrial = localFont({
+  src: [
+    {
+      path: "../font/BagossStandardTRIAL-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-bagossTrial",
 });
 
 export const metadata: Metadata = {
@@ -44,7 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${junicode.variable} ${bagossTrial.variable} antialiased font-junicode`}
       >
         <ViewModeProvider>
           <Navbar />
