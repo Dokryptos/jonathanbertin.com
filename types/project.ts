@@ -16,4 +16,5 @@ export default interface Project {
   slug: Slug;
   thumbnail: SanityImage;
   gallery: SanityImage[];
+  description: string;
 }

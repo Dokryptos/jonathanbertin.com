@@ -1,6 +1,6 @@
 "use client";
 
-import Grid from "../ui/grid";
+import Grid from "../ui/grid/index";
 import HomeImgType from "@/types/homepage";
 import { UIImageSanity } from "../ui/image/sanity";
 import { useEffect, useState } from "react";

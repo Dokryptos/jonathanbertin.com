@@ -1,6 +1,6 @@
 "use client";
 
-import Grid from "@/components/ui/grid";
+import Grid from "@/components/ui/grid/index";
 // import { useViewMode } from "@/context/ViewModeContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-30 text-[14px]/[18px] desktop:text-[20px]/[26px] h-[80px] bg-white pl-5 pr-5 pt-3`}
+      className={`fixed top-0 left-0 w-full z-30 text-[14px]/[18px] desktop:text-[20px]/[26px] h-[80px] desktop:h-[96px] bg-white pl-5 pr-5 pt-3`}
     >
       <Grid>
         <div className="col-start-1 laptop:col-span-6 tablet:col-span-4 col-span-3">
