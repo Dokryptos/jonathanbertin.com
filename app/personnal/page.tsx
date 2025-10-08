@@ -8,6 +8,5 @@ export default async function PersonalPage() {
   if (!personalData) {
     throw new Error("No data");
   }
-  console.log(personalData);
   return <PersonnalComponent personnalData={personalData} />;
 }
