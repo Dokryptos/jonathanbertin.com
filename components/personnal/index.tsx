@@ -8,6 +8,7 @@ import { useViewMode } from "@/context/ViewModeContext";
 import Link from "next/link";
 import ListDesktop from "../ui/list/ListDesktop";
 import ListMobile from "../ui/list/ListMobile";
+import DisplayListMode from "../ui/display";
 
 interface PersonnalProps {
   personnalData: PersonnalType[];
@@ -33,50 +34,53 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
   };
 
   return (
-    <div
-      className="scroll-div pt-[80px] desktop:pt-[96px] pl-5 pr-5 h-full overflow-y-scroll"
-      ref={scrollRef}
-    >
-      <div>
-        {viewMode === "grid" ? (
-          <Grid className="gap-x-5">
-            {personnalData.map((project: PersonnalType, i: number) => (
-              <motion.div
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                className="mb-10"
-                variants={gridAnimationVariant}
-                key={project._id}
-              >
-                <Link
-                  href={`/${project?.slug?.current}`}
-                  onMouseEnter={() => {
-                    setHoveredImageId(project._id);
-                  }}
+    <>
+      <div
+        className="scroll-div pt-[80px] desktop:pt-[96px] pl-5 pr-5 h-full overflow-y-scroll"
+        ref={scrollRef}
+      >
+        <div>
+          {viewMode === "grid" ? (
+            <Grid className="gap-x-5">
+              {personnalData.map((project: PersonnalType, i: number) => (
+                <motion.div
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  className="mb-10"
+                  variants={gridAnimationVariant}
+                  key={project._id}
                 >
-                  <UIImageSanity
-                    key={project._id}
-                    asset={project.thumbnail.asset}
-                    className="pb-3"
-                    alt={`Grid image ${project.title}`}
-                  />
-                  <h2
-                    className={`opacity-100 ${hoveredImageId === project._id ? "laptop:opacity-100" : "laptop:opacity-0"}`}
+                  <Link
+                    href={`/${project?.slug?.current}`}
+                    onMouseEnter={() => {
+                      setHoveredImageId(project._id);
+                    }}
                   >
-                    {project?.title}, {project.gallery.length} Images
-                  </h2>
-                </Link>
-              </motion.div>
-            ))}
-          </Grid>
-        ) : (
-          <>
-            <ListDesktop projectArray={personnalData} />
-            <ListMobile projectArray={personnalData} scrollRef={scrollRef} />
-          </>
-        )}
+                    <UIImageSanity
+                      key={project._id}
+                      asset={project.thumbnail.asset}
+                      className="pb-3"
+                      alt={`Grid image ${project.title}`}
+                    />
+                    <h2
+                      className={`opacity-100 ${hoveredImageId === project._id ? "laptop:opacity-100" : "laptop:opacity-0"}`}
+                    >
+                      {project?.title}, {project.gallery.length} Images
+                    </h2>
+                  </Link>
+                </motion.div>
+              ))}
+            </Grid>
+          ) : (
+            <>
+              <ListDesktop projectArray={personnalData} />
+              <ListMobile projectArray={personnalData} scrollRef={scrollRef} />
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      <DisplayListMode />
+    </>
   );
 }

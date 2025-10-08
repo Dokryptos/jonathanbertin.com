@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-type GridProps = {
+type ListProps = {
   children: ReactNode;
   className?: string;
 };
 
-export default function Grid({ children, className = "" }: GridProps) {
+export default function List({ children, className = "" }: ListProps) {
   return <div className={`flex flex-wrap ${className}`}>{children}</div>;
 }

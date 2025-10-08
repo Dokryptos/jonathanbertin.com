@@ -2,7 +2,6 @@ import List from "@/components/ui/list";
 import { motion } from "framer-motion";
 import { UIImageSanity } from "../../ui/image/sanity";
 import ProjectType from "@/types/project";
-import Link from "next/link";
 import {
   useState,
   useEffect,
