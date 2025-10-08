@@ -42,11 +42,6 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
             setHoveredImageId(project._id);
             setHoveredLink(project.slug.current);
           }}
-          // onMouseLeave={() => {
-          //   setHoveredImage(null);
-          //   setHoveredImageId(null);
-          //   setHoveredLink(null);
-          // }}
         >
           <Link href={`/${project?.slug?.current}`}>
             <h2

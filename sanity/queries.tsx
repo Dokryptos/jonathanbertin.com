@@ -54,3 +54,15 @@ export async function getAllArt(): Promise<ProjectType[]> {
   }
   return data;
 }
+
+export const ALL_PROJECT_QUERY = defineQuery(`*[
+  _type == "personal" && slug.current == $slug || _type == "commissioned" && slug.current == $slug
+] | order(orderRank) {_id, title,  thumbnail, slug, categorie, gallery, description}`);
+
+export async function getAllProject(): Promise<ProjectType[]> {
+  const { data } = await sanityFetch({ query: ALL_PROJECT_QUERY });
+  if (!data) {
+    notFound();
+  }
+  return data;
+}

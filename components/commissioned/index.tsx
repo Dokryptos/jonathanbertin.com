@@ -56,7 +56,7 @@ export default function CommissionedComponent({
                     <UIImageSanity
                       key={project._id}
                       asset={project.thumbnail.asset}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover min-h-[100px] tablet:min-h-[250px]"
                       alt={`Grid image ${project.title}`}
                     />
                   </Link>
