@@ -1,13 +1,11 @@
 "use client";
 
 import Grid from "@/components/ui/grid/index";
-// import { useViewMode } from "@/context/ViewModeContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-  // const { viewMode, setViewMode } = useViewMode();
 
   return (
     <nav
@@ -45,30 +43,6 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-
-        {/* Affichage du Toggle List/Grid uniquement sur la page Project
-          {pathname.includes("/project") && (
-            <div className="pt-5 pl-3 pb-10 font-ppeiko text-[10px] laptop:text-[12px] flex items-center">
-              <button
-                className={` pr-1 ${
-                  viewMode === "list" ? "text-black" : "text-[#818181]"
-                }`}
-                onClick={() => setViewMode("list")}
-              >
-                List
-              </button> 
-              /
-              <button
-                className={`pl-1 ${
-                  viewMode === "grid" ? "text-black" : "text-[#818181]"
-                }`}
-                onClick={() => setViewMode("grid")}
-              >
-                Grid
-              </button>
-            </div>
-          )}*/}
-
         <div className="desktop:col-start-12 tablet:col-start-10 col-start-6 col-span-2 flex justify-end gap-3">
           <Link
             className={` ${pathname.includes("/shop") ? "italic" : "not-italic"} hover:italic`}

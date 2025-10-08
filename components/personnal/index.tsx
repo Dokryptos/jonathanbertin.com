@@ -3,7 +3,7 @@ import Grid from "../ui/grid/projectListGrid";
 import type PersonnalType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useViewMode } from "@/context/ViewModeContext";
 import Link from "next/link";
 import ListDesktop from "../ui/list/ListDesktop";
@@ -15,7 +15,6 @@ interface PersonnalProps {
 }
 
 export default function PersonnalComponent({ personnalData }: PersonnalProps) {
-  const [hoveredImageId, setHoveredImageId] = useState<string | null>(null);
   const { viewMode } = useViewMode();
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -41,33 +40,23 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
       >
         <div>
           {viewMode === "grid" ? (
-            <Grid className="gap-x-5">
+            <Grid className="gap-x-3">
               {personnalData.map((project: PersonnalType, i: number) => (
                 <motion.div
                   custom={i}
                   initial="hidden"
                   animate="visible"
-                  className="mb-10"
                   variants={gridAnimationVariant}
                   key={project._id}
+                  className="w-full overflow-hidden"
                 >
-                  <Link
-                    href={`/${project?.slug?.current}`}
-                    onMouseEnter={() => {
-                      setHoveredImageId(project._id);
-                    }}
-                  >
+                  <Link href={`/${project?.slug?.current}`}>
                     <UIImageSanity
                       key={project._id}
                       asset={project.thumbnail.asset}
-                      className="pb-3"
+                      className="w-full h-full object-cover"
                       alt={`Grid image ${project.title}`}
                     />
-                    <h2
-                      className={`opacity-100 ${hoveredImageId === project._id ? "laptop:opacity-100" : "laptop:opacity-0"}`}
-                    >
-                      {project?.title}, {project.gallery.length} Images
-                    </h2>
                   </Link>
                 </motion.div>
               ))}
