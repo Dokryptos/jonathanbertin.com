@@ -10,9 +10,15 @@ interface ListDesktopProps {
 }
 
 export default function ListDesktop({ projectArray }: ListDesktopProps) {
-  const [hoveredImage, setHoveredImage] = useState<SanityImage | null>(null);
-  const [hoveredImageId, setHoveredImageId] = useState<string | null>(null);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [hoveredImage, setHoveredImage] = useState<SanityImage | null>(
+    projectArray[0].thumbnail
+  );
+  const [hoveredImageId, setHoveredImageId] = useState<string | null>(
+    projectArray[0]._id
+  );
+  const [hoveredLink, setHoveredLink] = useState<string | null>(
+    projectArray[0].slug.current
+  );
 
   const listAnimationVariant = {
     hidden: { opacity: 0 },
@@ -36,11 +42,11 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
             setHoveredImageId(project._id);
             setHoveredLink(project.slug.current);
           }}
-          onMouseLeave={() => {
-            setHoveredImage(null);
-            setHoveredImageId(null);
-            setHoveredLink(null);
-          }}
+          // onMouseLeave={() => {
+          //   setHoveredImage(null);
+          //   setHoveredImageId(null);
+          //   setHoveredLink(null);
+          // }}
         >
           <Link href={`/${project?.slug?.current}`}>
             <h2
