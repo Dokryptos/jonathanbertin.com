@@ -7,7 +7,6 @@ export default async function Home() {
   if (!homeData) {
     throw new Error("No data");
   }
-  console.log(homeData);
 
   return (
     <div>

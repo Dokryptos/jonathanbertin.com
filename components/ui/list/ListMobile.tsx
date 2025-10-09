@@ -23,7 +23,6 @@ export default function ListMobile({
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const projectHeight = 300;
   const totalHeight = (projectArray.length + 1) * projectHeight;
-  const [firstAnimationDone, setFirstAnimationDone] = useState(false);
 
   const updateSelectedIndex = () => {
     if (!scrollRef.current) return;
@@ -108,14 +107,6 @@ export default function ListMobile({
     }),
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFirstAnimationDone(true);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div
       className="laptop:hidden flex overflow-y-auto"
@@ -129,6 +120,8 @@ export default function ListMobile({
         {projectArray.map((project: ProjectType, i: number) => (
           <motion.div
             key={project._id}
+            className="mix-blend-difference"
+            style={{ willChange: "opacity, transform" }}
             custom={i}
             initial="hidden"
             animate="visible"
@@ -136,7 +129,7 @@ export default function ListMobile({
           >
             <h2
               data-href={`/${project?.slug?.current}`}
-              className={`z-20 mix-blend-difference relative flex text-[14px]/[14px] pt-1 pb-1 ${!firstAnimationDone && projectArray[selectedIndex]?._id === project._id ? "text-black" : projectArray[selectedIndex]?._id === project._id ? "text-white z-20" : "text-[#474747]"}`}
+              className={`z-20 mix-blend-difference relative flex text-[14px]/[14px] pt-1 pb-1 ${projectArray[selectedIndex]?._id === project._id ? "text-white z-20" : "text-[#474747]"}`}
             >
               {project?.title}
               {i < projectArray.length - 1 && (
