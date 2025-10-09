@@ -22,7 +22,7 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
             onClick={onClose}
           ></motion.div>
           <motion.div
-            className="fixed top-0 right-0 h-full w-4/5 tablet:1/2 laptop:1/3 desktop:1/4  bg-white z-50 pr-5 pl-5 overflow-y-auto"
+            className="fixed top-0 right-0 h-full w-4/5 tablet:w-1/2 laptop:w-2/5  desktop:w-1/3  bg-white z-50 pr-5 pl-5 overflow-y-auto"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
