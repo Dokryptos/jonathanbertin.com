@@ -1,8 +1,8 @@
 "use client";
 import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
-import { motion } from "framer-motion";
 import { useState } from "react";
+import PopUp from "../ui/popUp";
 
 interface SlugProps {
   allProjectData: ProjectType[];
@@ -30,9 +30,34 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
             <p className="pr-2">{slugProject.title}</p>
             <p>{`(${slugProject.gallery.length})`}</p>
           </div>
-          <button onClick={() => !setInfoOpen}>Informations</button>
+          <button
+            onClick={() => {
+              setInfoOpen(!infoOpen);
+            }}
+          >
+            Informations
+          </button>
         </div>
       </div>
+      <PopUp isOpen={infoOpen} onClose={() => setInfoOpen(false)}>
+        <div className="pt-[56px]">
+          <h2 className="font-bagossTrial text-[14px]/[130%] pb-6">
+            {slugProject.title}
+          </h2>
+          <p className="font-junicode whitespace-pre-wrap">
+            {slugProject.description}
+          </p>
+        </div>
+
+        <button
+          className="fixed bottom-3 right-4 p-1 text-[14px]/[18px] "
+          onClick={() => {
+            setInfoOpen(!infoOpen);
+          }}
+        >
+          Informations
+        </button>
+      </PopUp>
     </>
   );
 }
