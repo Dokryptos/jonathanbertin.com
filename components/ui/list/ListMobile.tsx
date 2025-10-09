@@ -136,11 +136,11 @@ export default function ListMobile({
           >
             <h2
               data-href={`/${project?.slug?.current}`}
-              className={`z-20 mix-blend-difference relative flex text-[14px]/[14px] pt-1 pb-1 ${!firstAnimationDone && projectArray[selectedIndex]?._id === project._id ? "text-black" : projectArray[selectedIndex]?._id === project._id ? "text-white z-20" : "text-[#B8B8B8]"}`}
+              className={`z-20 mix-blend-difference relative flex text-[14px]/[14px] pt-1 pb-1 ${!firstAnimationDone && projectArray[selectedIndex]?._id === project._id ? "text-black" : projectArray[selectedIndex]?._id === project._id ? "text-white z-20" : "text-[#474747]"}`}
             >
               {project?.title}
               {i < projectArray.length - 1 && (
-                <p className="text-[#B8B8B8]"></p>
+                <p className="text-[#474747]"></p>
               )}
             </h2>
           </motion.div>

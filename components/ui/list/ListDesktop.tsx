@@ -33,6 +33,8 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
       {projectArray.map((project: ProjectType, i: number) => (
         <motion.div
           key={project._id}
+          className="mix-blend-difference"
+          style={{ willChange: "opacity, transform" }}
           custom={i}
           initial="hidden"
           animate="visible"
@@ -45,11 +47,11 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
         >
           <Link href={`/${project?.slug?.current}`}>
             <h2
-              className={`z-10 mix-blend-difference relative flex desktop:text-[20px]/[20px] laptop:text-[14px]/[14px] pt-1 pb-1 w-auto ${hoveredImageId === project._id ? "text-white" : "text-[#B8B8B8]"}`}
+              className={`z-10 mix-blend-difference relative flex desktop:text-[20px]/[20px] laptop:text-[16px] pt-1 pb-1 w-auto ${hoveredImageId === project._id ? "text-white" : "text-[#474747]"}`}
             >
               {project?.title}
               {i < projectArray.length - 1 && (
-                <p className="text-[#B8B8B8]"></p>
+                <p className="text-[#474747]"></p>
               )}
             </h2>
           </Link>
