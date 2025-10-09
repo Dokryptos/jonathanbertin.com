@@ -1,7 +1,7 @@
 "use client";
 import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PopUp from "../ui/popUp";
 
 interface SlugProps {
@@ -9,11 +9,25 @@ interface SlugProps {
 }
 
 export default function SlugComponent({ allProjectData }: SlugProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allProjectData[0];
+
+  const handleWheel = (e: React.WheelEvent) => {
+    const slider = scrollRef.current;
+    if (!slider) return;
+    e.preventDefault();
+    slider.scrollLeft += e.deltaY * 8;
+  };
+
   return (
     <>
-      <div className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 mr-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden scrollbar-hide">
+      <div
+        ref={scrollRef}
+        onWheel={handleWheel}
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 mr-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden scrollbar-hide select-none"
+      >
         {slugProject.gallery.map((image, i) => (
           <div
             key={`${i}`}
