@@ -26,7 +26,7 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: "spring", damping: 20 }}
           >
             <button
               onClick={onClose}

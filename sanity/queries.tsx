@@ -47,7 +47,7 @@ export const NEWS_QUERY = defineQuery(`*[
   _type == "news"
 ] | order(orderRank) {_id, title, thumbnail, slug, gallery, description}`);
 
-export async function getAllArt(): Promise<ProjectType[]> {
+export async function getAllNews(): Promise<ProjectType[]> {
   const { data } = await sanityFetch({ query: NEWS_QUERY });
   if (!data) {
     notFound();
