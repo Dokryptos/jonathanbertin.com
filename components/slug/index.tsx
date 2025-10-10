@@ -3,6 +3,7 @@ import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
 import { useRef, useState } from "react";
 import PopUp from "../ui/popUp";
+import { motion } from "framer-motion";
 
 interface SlugProps {
   allProjectData: ProjectType[];
@@ -66,7 +67,13 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
           </p>
         </div>
 
-        <div className="fixed bottom-0 right-0 w-4/5 tablet:w-1/2 laptop:w-2/5  desktop:w-1/3  bg-white z-50 pt-3 pb-3 pr-5 pl-5 flex justify-end">
+        <motion.div
+          className="fixed bottom-0 right-0 w-4/5 tablet:w-1/2 laptop:w-2/5  desktop:w-1/3  bg-white z-50 pt-3 pb-3 pr-5 pl-5 flex justify-end"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
           <button
             className="p-1 text-[16px]/[18px] z-50"
             onClick={() => {
@@ -75,7 +82,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
           >
             Informations
           </button>
-        </div>
+        </motion.div>
       </PopUp>
     </>
   );

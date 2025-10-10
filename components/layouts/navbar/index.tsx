@@ -45,13 +45,13 @@ export default function Navbar() {
         </div>
         <div className="desktop:col-start-12 tablet:col-start-10 col-start-6 col-span-2 flex justify-end gap-3">
           <Link
-            className={` ${pathname.includes("/shop") ? "italic" : "not-italic"} hover:italic h-auto`}
+            className={` ${pathname.includes("/shop") ? "italic" : "not-italic"} hover:italic leading-none`}
             href="/shop"
           >
             Shop
           </Link>
           <Link
-            className={`${pathname.includes("/cart") ? "italic desktop:text-[18.7px] laptop:text-[16.18px]" : "not-italic"} hover:italic hover:desktop:text-[18.7px] hover:laptop:text-[15.02px] h-auto`}
+            className={`${pathname.includes("/cart") ? "italic desktop:text-[18.7px] laptop:text-[16.18px]" : "not-italic"} hover:italic hover:desktop:text-[18.7px] hover:laptop:text-[15.02px] leading-none`}
             href="/cart"
           >
             Cart
