@@ -3,7 +3,7 @@ import Grid from "../ui/grid/projectListGrid";
 import type PersonnalType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useViewMode } from "@/context/ViewModeContext";
 import Link from "next/link";
 import ListDesktop from "../ui/list/ListDesktop";
@@ -17,6 +17,9 @@ interface PersonnalProps {
 export default function PersonnalComponent({ personnalData }: PersonnalProps) {
   const { viewMode } = useViewMode();
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredImageTitle, setHoveredImageTitle] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const scrollableElement = document.querySelector(".scroll-div");
@@ -40,27 +43,40 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
       >
         <div>
           {viewMode === "grid" ? (
-            <Grid className="gap-x-3">
-              {personnalData.map((project: PersonnalType, i: number) => (
-                <motion.div
-                  custom={i}
-                  initial="hidden"
-                  animate="visible"
-                  variants={gridAnimationVariant}
-                  key={project._id}
-                  className="w-full overflow-hidden"
-                >
-                  <Link href={`/${project?.slug?.current}`}>
-                    <UIImageSanity
-                      key={project._id}
-                      asset={project.thumbnail.asset}
-                      className="w-full h-full object-cover min-h-[100px] tablet:min-h-[250px]"
-                      alt={`Grid image ${project.title}`}
-                    />
-                  </Link>
-                </motion.div>
-              ))}
-            </Grid>
+            <>
+              <Grid className="gap-x-3">
+                {personnalData.map((project: PersonnalType, i: number) => (
+                  <motion.div
+                    custom={i}
+                    initial="hidden"
+                    animate="visible"
+                    variants={gridAnimationVariant}
+                    key={project._id}
+                    className="w-full overflow-hidden"
+                  >
+                    <Link
+                      href={`/${project?.slug?.current}`}
+                      onMouseEnter={() => {
+                        setHoveredImageTitle(project.title);
+                      }}
+                      onMouseLeave={() => {
+                        setHoveredImageTitle(null);
+                      }}
+                    >
+                      <UIImageSanity
+                        key={project._id}
+                        asset={project.thumbnail.asset}
+                        className="w-full h-full object-cover min-h-[100px] tablet:min-h-[250px]"
+                        alt={`Grid image ${project.title}`}
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </Grid>
+              <div className="hidden laptop:flex laptop:fixed bottom-2 left-5 z-60">
+                {hoveredImageTitle}
+              </div>
+            </>
           ) : (
             <>
               <ListDesktop projectArray={personnalData} />
