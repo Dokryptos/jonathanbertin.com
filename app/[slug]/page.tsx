@@ -18,7 +18,6 @@ export default async function SlugPage({
     query: PROJECT_QUERY,
     params: { slug: (await params).slug },
   });
-  console.log(allProjectData);
   if (!allProjectData) {
     throw new Error("No data");
   }

@@ -3,7 +3,6 @@ import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
 import { useRef, useState } from "react";
 import PopUp from "../ui/popUp";
-import { motion } from "framer-motion";
 
 interface SlugProps {
   allProjectData: ProjectType[];
@@ -27,7 +26,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
       <div
         ref={scrollRef}
         onWheel={handleWheel}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 mr-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden scrollbar-hide select-none"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 mr-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
       >
         {slugProject?.gallery?.map((image, i) => (
           <div
@@ -52,13 +51,14 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
             onClick={() => {
               setInfoOpen(!infoOpen);
             }}
+            className="cursor-pointer"
           >
             Informations
           </button>
         </div>
       </div>
       <PopUp isOpen={infoOpen} onClose={() => setInfoOpen(false)}>
-        <div className="pt-[56px]">
+        <div className="pt-[46px]">
           <h2 className="font-bagossTrial text-[16px]/[130%] pb-6">
             {slugProject?.title}
           </h2>
@@ -66,23 +66,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
             {slugProject?.description}
           </p>
         </div>
-
-        <motion.div
-          className="fixed bottom-0 right-0 w-4/5 tablet:w-1/2 laptop:w-2/5  desktop:w-1/3  bg-white z-50 pt-3 pb-3 pr-5 pl-5 flex justify-end"
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        >
-          <button
-            className="p-1 text-[16px]/[18px] z-50"
-            onClick={() => {
-              setInfoOpen(!infoOpen);
-            }}
-          >
-            Informations
-          </button>
-        </motion.div>
+            
       </PopUp>
     </>
   );
