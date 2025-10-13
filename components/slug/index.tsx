@@ -26,7 +26,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
       <div
         ref={scrollRef}
         onWheel={handleWheel}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 mr-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] ml-5 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
       >
         {slugProject?.gallery?.map((image, i) => (
           <div
@@ -66,7 +66,6 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
             {slugProject?.description}
           </p>
         </div>
-            
       </PopUp>
     </>
   );
