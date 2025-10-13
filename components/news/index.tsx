@@ -32,7 +32,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="font-bagossTrial text-[12px] pt-3 tablet:pb-4">
+                <div className="font-bagossTrial text-[14px] pt-3 tablet:pb-4">
                   {project.title}
                 </div>
               </Link>
@@ -60,7 +60,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
             />
             <div className="pt-3 h-[10px]">
               {isHovered === project._id && (
-                <div className="font-bagossTrial text-[12px]">
+                <div className="font-bagossTrial text-[14px]">
                   {project.title}
                 </div>
               )}
