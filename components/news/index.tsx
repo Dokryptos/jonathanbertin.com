@@ -41,7 +41,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
         </div>
       </div>
       <div
-        className="hidden laptop:flex flex-row ml-5 h-dvh scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide select-none"
+        className="hidden laptop:flex flex-row pl-5 h-dvh scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide select-none pr-2"
         ref={scrollRef}
         onWheel={handleWheel}
       >
