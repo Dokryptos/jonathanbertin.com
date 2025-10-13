@@ -56,7 +56,7 @@ export default function CarrousselMobile({
           >
             <UIImageSanity
               asset={image.asset}
-              alt={`${title || "slide"}-${i}`}
+              alt={`${title} || "slide"}-${i}`}
               className="w-full h-full object-cover"
             />
           </div>
