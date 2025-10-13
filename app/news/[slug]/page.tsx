@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
-export const NEWS_SLUG_QUERY = defineQuery(`*[
+const NEWS_SLUG_QUERY = defineQuery(`*[
   _type == "news" && slug.current == $slug ] | order(orderRank) {_id, title,  thumbnail, slug, categorie, gallery, description}`);
 
 export default async function NewsSlugPage({
