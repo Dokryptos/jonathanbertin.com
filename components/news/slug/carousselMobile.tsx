@@ -36,7 +36,7 @@ export default function CarrousselMobile({
   }, []);
 
   return (
-    <div className="relative w-full pb-6 laptop:hidden">
+    <div className="relative w-full pb-6 tablet:hidden">
       <div
         ref={scrollRef}
         className="
