@@ -8,7 +8,6 @@ interface ShopDataProps {
 }
 
 export default function ShopComponent({ shopData }: ShopDataProps) {
-  console.log(shopData[0].variants.edges[0]?.node.price);
   return (
     <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-4 pt-[80px] desktop:pt-[96px] gap-3 pr-5 pl-5">
       {shopData.map((product) => (
@@ -26,7 +25,7 @@ export default function ShopComponent({ shopData }: ShopDataProps) {
             />
           </div>
           <div className="pt-3 font-bagossTrial text-[14px] laptop:text-[10px] desktop:text-[14px] w-full flex justify-between">
-            <h3>{product.title}</h3>
+            <div>{product.title}</div>
             {product.availableForSale ? (
               <p className="">Épuisé</p>
             ) : (

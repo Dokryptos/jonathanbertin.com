@@ -1,6 +1,6 @@
 export const PRODUCTS_QUERY = `
   query Products {
-    products(first: 10) {
+    products(first: 20) {
       edges {
         node {
           id
@@ -25,6 +25,32 @@ export const PRODUCTS_QUERY = `
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const PRODUCT_BY_HANDLE_QUERY = `
+  query ProductByHandle($handle: String!) {
+    product(handle: $handle) {
+      id
+      title
+      description
+      descriptionHtml
+      handle
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 20) {
+        edges {
+          node {
+            url
+            altText
           }
         }
       }

@@ -8,3 +8,9 @@ const imageFragment = /* GraphQL */ `
 `;
 
 export default imageFragment;
+export interface ImageFragment {
+  url: string;
+  altText?: string | null;
+  width?: number | null;
+  height?: number | null;
+}
