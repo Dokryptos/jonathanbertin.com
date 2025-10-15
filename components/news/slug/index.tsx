@@ -30,7 +30,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
           </div>
         ))}
       </div>
-      <div className="whitespace-pre-wrap text-[14px]/[18px] pt-3 tablet:pt-0 pl-[6px] laptop:pl-6 desktop:pl-[65px] laptop:pr-[51px] desktop:pr-[133px] overflow-y-auto scrollbar-hide tablet:max-h-[calc(100vh-80px)] desktop:max-h-[calc(100vh-96px)]">
+      <div className="whitespace-pre-wrap text-[16px]/[18px] pt-3 tablet:pt-0 pl-[6px] laptop:pl-6 desktop:pl-[65px] laptop:pr-[51px] desktop:pr-[133px] overflow-y-auto scrollbar-hide tablet:max-h-[calc(100vh-80px)] desktop:max-h-[calc(100vh-96px)] pb-5">
         <div className="font-bagossTrial text-[20px]/[18px] desktop:text-[25px] items-center pb-4 hidden tablet:flex ">
           {selectedNewsData.title}
           <span className="text-[9px] tablet:text-[12px] pl-2">{`(0${selectedNewsData.gallery.length})`}</span>

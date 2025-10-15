@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Grid from "@/components/ui/grid/index";
@@ -46,10 +46,7 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
 
             {/* Bouton collé en bas */}
             <div className="sticky bottom-0 right-0 w-full bg-white pt-3 pb-3 pr-5 pl-5 flex justify-end z-50">
-              <button
-                className="p-1 text-[14px]/[16px]"
-                onClick={onClose}
-              >
+              <button className="p-1 text-[16px]/[16px]" onClick={onClose}>
                 Informations
               </button>
             </div>

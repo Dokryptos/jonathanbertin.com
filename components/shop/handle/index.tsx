@@ -40,12 +40,12 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           €{productData.priceRange.minVariantPrice.amount}
         </div>
         <div className="flex tablet:hidden pb-6">
-          <button className="p-3 bg-black text-white border-1 border-black rounded-4xl w-full underline text-[14px]">
+          <button className="p-3 bg-black text-white border-1 border-black rounded-4xl w-full underline text-[16px]">
             Ajouter au panier
           </button>
         </div>
         <div
-          className="text-[14px] pb-5 font-junicode prose prose-sm max-w-none"
+          className="text-[16px] pb-5 font-junicode prose prose-sm max-w-none"
           dangerouslySetInnerHTML={{ __html: productData.descriptionHtml }}
         />
         <div className="w-full justify-between items-center text-[14px] hidden tablet:flex">
