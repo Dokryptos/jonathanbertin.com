@@ -98,7 +98,12 @@ export default function AboutPage() {
           </p>
         </div>
         <div>
-          <p>Droits d&#39;auteur © 2025 ERRANCE STUDIO - Jonathan Bertin</p>
+          <p>
+            Droits d&#39;auteur © 2025{" "}
+            <a href="https://jonathanbertin.com/">
+              ERRANCE STUDIO - Jonathan Bertin
+            </a>
+          </p>
         </div>
       </div>
     </Grid>
