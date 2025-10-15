@@ -5,10 +5,10 @@ import Image from "next/image";
 export default function AboutPage() {
   return (
     <Grid className="pt-[80px] desktop:pt-[96px] pr-5 pl-5 pb-6">
-      <div className="col-span-6">
+      <div className="col-span-6 tablet:col-span-7 flex tablet:hidden">
         <Image src={Aboutimg} alt="About section image" />
       </div>
-      <div className="flex flex-col col-span-6 font-junicode text-[16px]/[130%] gap-3 pt-6 pb-10">
+      <div className="flex flex-col col-span-6 font-junicode text-[16px]/[130%] gap-3 pt-6 pb-10 tablet:pt-0 tablet:pr-5 laptop:col-span-5">
         <h1 className="text-[20px] font-bagossTrial ">À propos</h1>
         <p>
           Né en Normandie en 1996, Jonathan Bertin vit et travaille à Paris
@@ -70,8 +70,13 @@ export default function AboutPage() {
           à l’oubli.
         </p>
       </div>
-      <div className="flex flex-col col-span-6 gap-6">
-        <div className="text-[16px]">
+      <div className="flex flex-col col-span-6 gap-6 tablet:col-start-7 tablet:pt-[30px] tablet:col-span-4 laptop:col-span-2 laptop:col-start-6 desktop:col-start-7 desktop:pr-3 desktop:pt-[30px] tablet:gap-5">
+        <Image
+          src={Aboutimg}
+          alt="About section image"
+          className="hidden tablet:flex laptop:hidden"
+        />
+        <div className="text-[16px]/[130%]">
           <h1 className="font-bagossTrial pb-3">Publications</h1>
           <p className="font-junicode">
             Numero, Libération, The Good Life, GQ, Fisheye, Polka, L&#39;Obs,
@@ -85,7 +90,30 @@ export default function AboutPage() {
             Samsung, Nissan, Lexus, Google, Nikon, Région Normandie, Polaroïd
           </p>
         </div>
-        <div>
+        <div className="desktop:hidden">
+          <h1 className="font-bagossTrial pb-3">Contact</h1>
+          <p>
+            Jonathan Bertin
+            <br />
+            Photographe & Directeur Artistique
+            <br />
+            <a href="mailto:contact@jonathanbertin.com?">
+              contact@jonathanbertin.com
+            </a>
+          </p>
+        </div>
+        <div className="desktop:hidden">
+          <p>
+            Droits d&#39;auteur © 2025
+            <br className="hidden laptop:block" />
+            <a href="https://jonathanbertin.com/" className="underline">
+              ERRANCE STUDIO - Jonathan Bertin
+            </a>
+          </p>
+        </div>
+      </div>
+      <div className="col-start-9 col-span-2 hidden desktop:block pt-[30px] text-[16px]/[130%] pr-3">
+        <div className="pb-5">
           <h1 className="font-bagossTrial pb-3">Contact</h1>
           <p>
             Jonathan Bertin
@@ -100,11 +128,14 @@ export default function AboutPage() {
         <div>
           <p>
             Droits d&#39;auteur © 2025{" "}
-            <a href="https://jonathanbertin.com/">
+            <a href="https://jonathanbertin.com/" className="underline">
               ERRANCE STUDIO - Jonathan Bertin
             </a>
           </p>
         </div>
+      </div>
+      <div className="col-span-2 col-start-9 desktop:col-start-11 laptop:pt-[30px] hidden laptop:block">
+        <Image src={Aboutimg} alt="About section image" />
       </div>
     </Grid>
   );
