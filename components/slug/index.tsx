@@ -41,11 +41,11 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
           </div>
         ))}
       </div>
-      <div className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5`}>
-        <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px]">
+      <div className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5 font-junicode`}>
+        <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px]">
           <div className="flex">
             <p className="pr-2">{slugProject?.title}</p>
-            <p>{`(${slugProject?.gallery?.length})`}</p>
+            <p className="text-[9px]">{`(${slugProject?.gallery?.length})`}</p>
           </div>
           <button
             onClick={() => {
