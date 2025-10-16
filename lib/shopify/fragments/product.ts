@@ -19,6 +19,8 @@ export const PRODUCTS_QUERY = `
             edges {
               node {
                 id
+                availableForSale
+                quantityAvailable
                 price {
                   amount
                   currencyCode
@@ -46,6 +48,24 @@ export const PRODUCT_BY_HANDLE_QUERY = `
           currencyCode
         }
       }
+    variants(first: 20) {
+      edges {
+        node {
+          id
+          title
+          availableForSale
+          quantityAvailable
+          selectedOptions {
+            name
+            value
+          }
+          price {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
       images(first: 20) {
         edges {
           node {

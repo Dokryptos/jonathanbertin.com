@@ -12,7 +12,7 @@ interface ProductDataProps {
 
 export default function ShopHandleComponent({ productData }: ProductDataProps) {
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
-
+  console.log(productData.variants.edges);
   return (
     <>
       <div className="grid grid-cols-1 tablet:grid-cols-2 pt-[80px] desktop:pt-[96px] pl-5 pr-5">
@@ -57,16 +57,25 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           />
           <div className="w-full justify-between items-center text-[16px] hidden tablet:flex">
             <div>€{productData.priceRange.minVariantPrice.amount}</div>
-            <button className="p-3 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
-              Ajouter au panier
-            </button>
+            {productData.availableForSale ||
+            productData.variants.edges[0].node.quantityAvailable <= 0 ? (
+              <p>Épuisé</p>
+            ) : (
+              <button className="p-3 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
+                Ajouter au panier
+              </button>
+            )}
           </div>
         </div>
       </div>
       <div className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5 font-junicode`}>
         <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px ]">
-          <p>Ajouter au panier</p>
-
+          {productData.availableForSale ||
+          productData.variants.edges[0].node.quantityAvailable <= 0 ? (
+            <p>Épuisé</p>
+          ) : (
+            <p>Ajouter au panier</p>
+          )}
           <button
             onClick={() => {
               setInfoOpen(!infoOpen);

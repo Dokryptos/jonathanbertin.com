@@ -26,7 +26,8 @@ export default function ShopComponent({ shopData }: ShopDataProps) {
           </div>
           <div className="pt-3 font-bagossTrial text-[16px] laptop:text-[10px] desktop:text-[14px] w-full flex justify-between">
             <div>{product.title}</div>
-            {product.availableForSale ? (
+            {product.availableForSale ||
+            product.variants.edges[0].node.quantityAvailable <= 0 ? (
               <p className="">Épuisé</p>
             ) : (
               <p className="">
