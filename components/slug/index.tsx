@@ -45,7 +45,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
         <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px]">
           <div className="flex">
             <p className="pr-2">{slugProject?.title}</p>
-            <p className="text-[9px]">{`(${slugProject?.gallery?.length})`}</p>
+            <p className="text-[9px]">{`(${slugProject?.gallery?.length <= 9 ? `0${slugProject?.gallery?.length}` : `${slugProject?.gallery?.length}`})`}</p>
           </div>
           <button
             onClick={() => {

@@ -13,7 +13,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
     <div className="grid grid-cols-1 tablet:grid-cols-2 pt-[80px] desktop:pt-[96px] pl-5 pr-5">
       <div className="font-bagossTrial text-[20px]/[18px] flex items-center pb-4 tablet:hidden laptop:hidden">
         {selectedNewsData.title}
-        <span className="text-[9px] tarblet:text-[12px] pl-2">{`(0${selectedNewsData.gallery.length})`}</span>
+        <span className="text-[9px] tarblet:text-[12px] pl-2">{`(${selectedNewsData.gallery.length <= 9 ? `0${selectedNewsData?.gallery?.length}` : `${selectedNewsData?.gallery?.length}`})`}</span>
       </div>
       <CarousselMobile
         carousselGallery={selectedNewsData.gallery}

@@ -39,9 +39,9 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           ))}
         </div>
         <div className="whitespace-pre-wrap text-[14px]/[18px] pt-3 tablet:pt-0 tablet:pl-[6px] laptop:pl-6 desktop:pl-[65px] laptop:pr-[51px] desktop:pr-[133px] overflow-y-auto scrollbar-hide tablet:max-h-[calc(100vh-80px)] desktop:max-h-[calc(100vh-96px)] pb-[60px]">
-          <div className="font-bagossTrial text-[20px]/[18px] desktop:text-[25px] items-center pb-2 hidden tablet:flex">
+          <div className="font-bagossTrial text-[20px]/[18px] desktop:text-[25px] items-center pb-3 hidden tablet:flex">
             {productData.title}
-            <span className="text-[9px] tablet:text-[12px] pl-2">{`(0${productData.images.edges.length})`}</span>
+            <span className="text-[9px] tablet:text-[12px] pl-2">{`(${productData.images.edges.length <= 9 ? `0${productData.images.edges.length}` : `${productData.images.edges.length}`})`}</span>
           </div>
           <div className="text-[20px] pb-5 hidden tablet:flex">
             €{productData.priceRange.minVariantPrice.amount}
