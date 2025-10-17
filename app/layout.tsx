@@ -3,6 +3,7 @@ import { ViewModeProvider } from "@/context/ViewModeContext";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
+import { CartProvider } from "@/components/cart/cartContext";
 
 const junicode = localFont({
   src: [
@@ -63,8 +64,10 @@ export default function RootLayout({
         className={`${junicode.variable} ${bagossTrial.variable} antialiased font-junicode`}
       >
         <ViewModeProvider>
-          <Navbar />
-          {children}
+          <CartProvider>
+            <Navbar />
+            {children}
+          </CartProvider>
         </ViewModeProvider>
       </body>
     </html>

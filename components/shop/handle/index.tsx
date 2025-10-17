@@ -4,6 +4,7 @@ import { ShopifyProduct } from "@/lib/shopify/types";
 import CarousselMobile from "./carrousselMobile";
 import { useState } from "react";
 import PopUp from "@/components/ui/popUp";
+import AddToCartButton from "@/components/cart/cartButton";
 /* eslint-disable @next/next/no-img-element */
 
 interface ProductDataProps {
@@ -12,7 +13,7 @@ interface ProductDataProps {
 
 export default function ShopHandleComponent({ productData }: ProductDataProps) {
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
-  console.log(productData.variants.edges);
+  console.log(productData.variants.edges[0].node);
   return (
     <>
       <div className="grid grid-cols-1 tablet:grid-cols-2 pt-[80px] desktop:pt-[96px] pl-5 pr-5">
@@ -47,9 +48,11 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             €{productData.priceRange.minVariantPrice.amount}
           </div>
           <div className="flex tablet:hidden pb-6">
-            <button className="p-3 bg-black text-white border-1 border-black rounded-4xl w-full underline text-[16px]">
-              Ajouter au panier
-            </button>
+            <AddToCartButton variantId={productData.variants.edges[0].node.id}>
+              <button className="p-3 bg-black text-white border-1 border-black rounded-4xl w-full underline text-[16px]">
+                Ajouter au panier
+              </button>
+            </AddToCartButton>
           </div>
           <div
             className="text-[16px]/[130%] pb-5 font-junicode prose prose-sm "
@@ -61,20 +64,26 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             productData.variants.edges[0].node.quantityAvailable <= 0 ? (
               <p>Épuisé</p>
             ) : (
-              <button className="p-3 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
-                Ajouter au panier
-              </button>
+              <AddToCartButton
+                variantId={productData.variants.edges[0].node.id}
+              >
+                <button className="p-3 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
+                  Ajouter au panier
+                </button>
+              </AddToCartButton>
             )}
           </div>
         </div>
       </div>
       <div className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5 font-junicode`}>
-        <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px ]">
+        <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px]">
           {productData.availableForSale ||
           productData.variants.edges[0].node.quantityAvailable <= 0 ? (
             <p>Épuisé</p>
           ) : (
-            <p>Ajouter au panier</p>
+            <AddToCartButton variantId={productData.variants.edges[0].node.id}>
+              <p className="underline ">Ajouter au panier</p>
+            </AddToCartButton>
           )}
           <button
             onClick={() => {

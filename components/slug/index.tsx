@@ -26,12 +26,12 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
       <div
         ref={scrollRef}
         onWheel={handleWheel}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-2 flex flex-col h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
       >
-        {slugProject?.gallery?.map((image, i) => (
+        {slugProject?.gallery?.map((image, i: number) => (
           <div
             key={`${i}`}
-            className="pb-3 tablet:pb-0 tablet:flex-shrink-0 tablet:pr-3 tablet:flex tablet:items-center tablet:justify-center tablet:h-full "
+            className={`tablet:pb-0 tablet:flex-shrink-0 tablet:pr-3 tablet:flex tablet:items-center tablet:justify-center tablet:h-full ${i === slugProject.gallery.length - 1 ? "pb-[50px] " : "pb-3"}`}
           >
             <UIImageSanity
               asset={image}

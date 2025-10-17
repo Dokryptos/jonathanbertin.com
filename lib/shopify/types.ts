@@ -158,6 +158,8 @@ export type ShopifyCreateCartOperation = {
 };
 
 export type ShopifyAddToCartOperation = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  cartLinesAdd: any;
   data: {
     cartLinesAdd: {
       cart: ShopifyCart;
