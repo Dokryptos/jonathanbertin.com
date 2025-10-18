@@ -17,7 +17,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/20 z-40"
+            className="fixed inset-0 bg-black/20 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -57,9 +57,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                     <span>SOUS-TOTAL</span>
                     <span>
                       {cost?.totalAmount?.amount}
-                      {cost?.totalAmount?.currencyCode === "EUR"
-                        ? "€"
-                        : "$"}
+                      {cost?.totalAmount?.currencyCode === "EUR" ? "€" : "$"}
                     </span>
                   </div>
                   {checkoutUrl && (
