@@ -28,7 +28,6 @@ export default function CarrousselMobile({
     el.addEventListener("scroll", handleScroll, { passive: true });
     return () => el.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log(carousselGallery);
 
   return (
     <div className="relative w-full pb-6 tablet:hidden">

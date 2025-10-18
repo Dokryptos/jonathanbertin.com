@@ -1,7 +1,7 @@
 "use client";
 import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PopUp from "../ui/popUp";
 
 interface SlugProps {
@@ -14,19 +14,21 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allProjectData[0];
 
-  const handleWheel = (e: React.WheelEvent) => {
-    const slider = scrollRef.current;
-    if (!slider) return;
-    e.preventDefault();
-    slider.scrollLeft += e.deltaY * 10;
-  };
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const slider = scrollRef.current;
+      if (!slider) return;
+      slider.scrollLeft += e.deltaY;
+    };
+    window.addEventListener("wheel", (e: WheelEvent) => handleWheel(e), { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, []);
 
   return (
     <>
       <div
         ref={scrollRef}
-        onWheel={handleWheel}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:scroll-smooth tablet:overflow-y-hidden select-none"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none"
       >
         {slugProject?.gallery?.map((image, i: number) => (
           <div

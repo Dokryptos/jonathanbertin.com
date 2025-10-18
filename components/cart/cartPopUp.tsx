@@ -1,8 +1,8 @@
 "use client";
 
-import { useCart } from "./cartContext";
+import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import CartLine from "./cartLine";
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -10,17 +10,8 @@ interface CartPopupProps {
 }
 
 export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
-  const { cart, removeFromCart, updateCartLine } = useCart();
+  const { lines, cost, checkoutUrl, totalQuantity = 0 } = useCart();
 
-  const increment = (lineId: string, quantity: number) => {
-    updateCartLine(lineId, quantity + 1);
-  };
-
-  const decrement = (lineId: string, quantity: number) => {
-    if (quantity <= 1) return;
-    updateCartLine(lineId, quantity - 1);
-  };
-  console.log(cart);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -48,82 +39,32 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
               ✕
             </button>
             {/* Panier vide */}
-            {!cart || cart.lines.length === 0 ? (
+            {!lines || lines.length === 0 ? (
               <div className="pt-[56px]">
                 <p className="mb-6 font-bagossTrial">{`Panier (00)`}</p>
                 <p className="pt-56px mb-4">Votre panier est vide.</p>
               </div>
             ) : (
               <div className="pt-[56px]">
-                <p className="mb-6 font-bagossTrial">{`Panier (${cart?.totalQuantity <= 9 ? `0${cart.totalQuantity}` : `${cart.totalQuantity}`}) `}</p>
-                {cart.lines.map((line, i) => {
-                  const merchandise = line.merchandise;
-                  const product = merchandise?.product;
-                  const imageUrl = product?.images?.edges?.[0]?.node?.url;
-                  const unitPrice = merchandise?.price?.amount || "0";
-                  const currency = merchandise?.price?.currencyCode || "EUR";
+                <p className="mb-6 font-bagossTrial">{`Panier (${totalQuantity <= 9 ? `0${totalQuantity}` : `${totalQuantity}`}) `}</p>
+                {lines.map((line) => {
+                  if (!line) return null;
 
-                  return (
-                    <div key={i}>
-                      <div key={line.id} className="flex mb-4">
-                        <div className=" relative w-25 h-25">
-                          <Image
-                            src={imageUrl}
-                            alt={product?.title || "Produit"}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-
-                        <div className="flex flex-col w-full h-auto justify-between pl-3">
-                          <div className="flex justify-between">
-                            <p>{product?.title}</p>
-                            <button onClick={() => removeFromCart(line.id)}>
-                              ✕
-                            </button>
-                          </div>
-                          <div className="flex justify-between">
-                            <div className="flex items-center justify-center gap-2">
-                              <button
-                                onClick={() =>
-                                  decrement(line?.id, line?.quantity)
-                                }
-                                className="px-2 py-1 text-[#8F877A] hover:text-black"
-                              >
-                                -
-                              </button>
-                              <span>{line?.quantity}</span>
-                              <button
-                                onClick={() =>
-                                  increment(line?.id, line?.quantity)
-                                }
-                                className="px-2 py-1 text-[#8F877A] hover:text-black"
-                              >
-                                +
-                              </button>
-                            </div>
-                            <p className="mt-1 text-sm">
-                              {unitPrice} {currency}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
+                  return <CartLine key={line.id} line={line} />;
                 })}
                 <div className="absolute bottom-5 flex flex-col w-full pr-10">
                   <div className="flex justify-between">
                     <span>SOUS-TOTAL</span>
                     <span>
-                      {cart?.cost?.totalAmount?.amount}
-                      {cart?.cost?.totalAmount?.currencyCode === "EUR"
+                      {cost?.totalAmount?.amount}
+                      {cost?.totalAmount?.currencyCode === "EUR"
                         ? "€"
                         : "$"}
                     </span>
                   </div>
-                  {cart && (
+                  {checkoutUrl && (
                     <button
-                      onClick={() => window.open(cart?.checkoutUrl)}
+                      onClick={() => window.open(checkoutUrl, "_blank")}
                       className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl"
                     >
                       Commander

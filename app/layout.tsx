@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import { CartProvider } from "@/components/cart/cartContext";
+import ProviderShopify from "@/components/layouts/providers/shopify";
 
 const junicode = localFont({
   src: [
@@ -63,12 +64,14 @@ export default function RootLayout({
       <body
         className={`${junicode.variable} ${bagossTrial.variable} antialiased font-junicode text-[16px]/[130%]`}
       >
-        <ViewModeProvider>
-          <CartProvider>
-            <Navbar />
-            {children}
-          </CartProvider>
-        </ViewModeProvider>
+        <ProviderShopify>
+          <ViewModeProvider>
+            <CartProvider>
+              <Navbar />
+              {children}
+            </CartProvider>
+          </ViewModeProvider>
+        </ProviderShopify>
       </body>
     </html>
   );

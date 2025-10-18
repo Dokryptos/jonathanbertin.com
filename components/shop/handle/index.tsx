@@ -13,7 +13,7 @@ interface ProductDataProps {
 
 export default function ShopHandleComponent({ productData }: ProductDataProps) {
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
-  console.log(productData.variants.edges[0].node);
+
   return (
     <>
       <div className="grid grid-cols-1 tablet:grid-cols-2 pt-[80px] desktop:pt-[96px] pl-5 pr-5">

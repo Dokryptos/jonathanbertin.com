@@ -5,36 +5,9 @@ import {
   useContext,
   useState,
   ReactNode,
-  useEffect,
 } from "react";
-import type {
-  Cart,
-  ShopifyCart,
-  ShopifyAddToCartOperation,
-  ShopifyRemoveFromCartOperation,
-  ShopifyUpdateCartOperation,
-} from "@/lib/shopify/types";
-import { shopifyFetch } from "@/lib/shopify/client";
-import {
-  CART_CREATE,
-  CART_LINES_ADD,
-  CART_LINES_REMOVE,
-  CART_LINES_UPDATE,
-  CART_QUERY,
-} from "@/lib/shopify/cartOperations";
-
-// Fonction utilitaire pour convertir ShopifyCart → Cart
-const mapShopifyCartToCart = (shopifyCart: ShopifyCart): Cart => ({
-  ...shopifyCart,
-  lines: shopifyCart.lines.edges.map((edge) => edge.node),
-});
 
 interface CartContextProps {
-  cart: Cart | null;
-  createCart: () => Promise<void>;
-  addToCart: (variantId: string, quantity: number) => Promise<void>;
-  removeFromCart: (lineId: string) => Promise<void>;
-  updateCartLine: (lineId: string, quantity: number) => Promise<void>;
   isCartOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
@@ -44,140 +17,15 @@ interface CartContextProps {
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<Cart | null>(null);
-
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
   const toggleCart = () => setIsCartOpen((prev) => !prev);
-  // Crée un nouveau panier si aucun cartId en localStorage
-  const createCart = async () => {
-    const data = await shopifyFetch<{
-      cartCreate: { cart: ShopifyCart };
-    }>(CART_CREATE, { input: { lines: [] } });
-    const newCart = mapShopifyCartToCart(data.cartCreate.cart);
-    localStorage.setItem("shopify_cart_id", newCart.id);
-    setCart(newCart);
-  };
-
-  // Ajoute une ligne au panier
-  const addToCart = async (variantId: string, quantity: number) => {
-    if (!cart) return;
-
-    const variables: ShopifyAddToCartOperation["variables"] = {
-      cartId: cart.id,
-      lines: [{ merchandiseId: variantId, quantity }],
-    };
-
-    const result = await shopifyFetch<ShopifyAddToCartOperation>(
-      CART_LINES_ADD,
-      variables
-    );
-
-    if (!result?.cartLinesAdd) {
-      console.error("Erreur lors de l'ajout au panier", result);
-      return;
-    }
-
-    const updatedCart = mapShopifyCartToCart(result.cartLinesAdd.cart);
-    setCart(updatedCart);
-  };
-
-  // Supprime une ligne du panier
-  const removeFromCart = async (lineId: string) => {
-    if (!cart) return;
-
-    const variables = { cartId: cart.id, lineIds: [lineId] };
-    const result = await shopifyFetch<ShopifyRemoveFromCartOperation>(
-      CART_LINES_REMOVE,
-      variables
-    );
-
-    if (!result?.cartLinesRemove?.cart) {
-      console.error("Erreur removeFromCart", result);
-      return;
-    }
-
-    const updatedCart = mapShopifyCartToCart(result.cartLinesRemove.cart);
-    setCart(updatedCart);
-  };
-
-  const updateCartLine = async (lineId: string, quantity: number) => {
-    if (!cart) return;
-
-    const line = cart.lines.find((l) => l.id === lineId);
-    if (!line) return;
-
-    const merchandiseId = line.merchandise?.id;
-    if (!merchandiseId) {
-      console.error("❌ merchandiseId manquant pour la ligne", line);
-      return;
-    }
-
-    console.log(
-      "Update line:",
-      lineId,
-      "merchandiseId:",
-      merchandiseId,
-      "quantity:",
-      quantity
-    );
-
-    const result = await shopifyFetch<ShopifyUpdateCartOperation>(
-      CART_LINES_UPDATE,
-      {
-        cartId: cart.id,
-        lines: [{ id: lineId, quantity }],
-      }
-    );
-
-    if (result?.cartLinesUpdate?.cart) {
-      const updatedCart = mapShopifyCartToCart(result.cartLinesUpdate.cart);
-      setCart(updatedCart);
-    } else {
-      console.error("⚠️ Erreur updateCartLine:", result);
-    }
-  };
-
-  useEffect(() => {
-    let mounted = true;
-    const cartId = localStorage.getItem("shopify_cart_id");
-
-    const initCart = async () => {
-      if (!cartId) {
-        // Crée un nouveau panier automatiquement
-        await createCart();
-        return;
-      }
-
-      try {
-        // Sinon récupère le panier existant
-        const data = await shopifyFetch<{ cart: ShopifyCart }>(CART_QUERY, {
-          cartId,
-        });
-        if (mounted) setCart(mapShopifyCartToCart(data.cart));
-      } catch (error) {
-        console.error("Impossible de récupérer le cart existant", error);
-        localStorage.removeItem("shopify_cart_id"); // Si le cart est invalide
-        await createCart(); // Crée un nouveau panier
-      }
-    };
-
-    initCart();
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   return (
     <CartContext.Provider
       value={{
-        cart,
-        createCart,
-        addToCart,
-        removeFromCart,
-        updateCartLine,
         isCartOpen,
         openCart,
         closeCart,
