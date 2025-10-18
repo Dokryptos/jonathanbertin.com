@@ -16,7 +16,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
     if (quantity < 1) return;
     updateCartLine(lineId, quantity);
   };
-  console.log(cart);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -52,58 +52,71 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
             ) : (
               <>
                 {/* Lignes du panier */}
-                {cart.lines.map((line) => (
-                  <div
-                    key={line.id}
-                    className="flex items-center justify-between mb-4"
-                  >
-                    {/* Image */}
-                    <div className="w-20 h-20 relative flex-shrink-0">
-                      <img
-                        src={line.merchandise.product.images[0].url}
-                        alt={line.merchandise.product.title}
-                        className="object-cover rounded"
-                      />
-                    </div>
+                {cart.lines.map((line) => {
+                  const merchandise = line.merchandise;
+                  const product = merchandise?.product;
+                  const imageUrl =
+                    product?.images?.edges?.[0]?.node?.url ||
+                    "/placeholder.jpg";
 
-                    {/* Info */}
-                    <div className="flex-1 ml-3">
-                      <p className="font-semibold">
-                        {line.merchandise.product.title}
-                      </p>
-                      {line.merchandise.selectedOptions.map((opt) => (
-                        <p key={opt.name} className="text-sm text-gray-600">
-                          {opt.name}: {opt.value}
+                  const unitPrice = merchandise?.price?.amount || "0";
+                  const currency = merchandise?.price?.currencyCode || "EUR";
+                  const totalLine = (Number(unitPrice) * line.quantity).toFixed(
+                    2
+                  );
+
+                  return (
+                    <div
+                      key={line.id}
+                      className="flex items-center justify-between mb-4"
+                    >
+                      {/* Image */}
+                      <div className="w-20 h-20 relative flex-shrink-0">
+                        <Image
+                          src={imageUrl}
+                          alt={product?.title || "Produit"}
+                          fill
+                          className="object-cover rounded"
+                        />
+                      </div>
+
+                      {/* Info */}
+                      <div className="flex-1 ml-3">
+                        <p className="font-semibold">
+                          {product?.title || "Produit inconnu"}
                         </p>
-                      ))}
-                      <p className="mt-1 font-bold">
-                        {line.cost.totalAmount.amount}{" "}
-                        {line.cost.totalAmount.currencyCode === "EUR"
-                          ? "€"
-                          : "$"}
-                      </p>
-                    </div>
+                        <p className="mt-1 text-sm">
+                          {unitPrice} {currency}
+                        </p>
+                        <p className="mt-1 font-bold">
+                          {totalLine} {currency === "EUR" ? "€" : "$"}
+                        </p>
+                      </div>
 
-                    {/* Actions */}
-                    <div className="flex flex-col items-end gap-2">
-                      <input
-                        type="number"
-                        min={1}
-                        value={line.quantity}
-                        onChange={(e) =>
-                          handleQuantityChange(line.id, Number(e.target.value))
-                        }
-                        className="w-16 border rounded text-center"
-                      />
-                      <button
-                        onClick={() => removeFromCart(line.id)}
-                        className="text-red-500 text-sm"
-                      >
-                        Supprimer
-                      </button>
+                      {/* Actions */}
+                      <div className="flex flex-col items-end gap-2">
+                        <input
+                          type="number"
+                          min={1}
+                          value={line.quantity}
+                          onChange={(e) =>
+                            handleQuantityChange(
+                              line.id,
+                              Number(e.target.value)
+                            )
+                          }
+                          className="w-16 border rounded text-center"
+                        />
+                        <button
+                          onClick={() => removeFromCart(line.id)}
+                          className="text-red-500 text-sm"
+                        >
+                          Supprimer
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 {/* Total */}
                 <div className="mt-5 border-t pt-3 flex justify-between font-bold">
@@ -115,12 +128,14 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                 </div>
 
                 {/* Checkout */}
-                <a
-                  href={cart.checkoutUrl}
-                  className="block mt-5 w-full text-center py-3 bg-black text-white rounded-lg"
-                >
-                  Passer à la caisse
-                </a>
+                {cart.checkoutUrl && (
+                  <a
+                    href={cart.checkoutUrl}
+                    className="block mt-5 w-full text-center py-3 bg-black text-white rounded-lg"
+                  >
+                    Passer à la caisse
+                  </a>
+                )}
               </>
             )}
           </motion.div>

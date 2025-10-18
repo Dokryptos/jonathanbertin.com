@@ -26,6 +26,10 @@ export type CartItem = {
     totalAmount: Money;
   };
   merchandise: {
+    price: {
+      amount: string;
+      currencyCode: string;
+    };
     id: string;
     title: string;
     selectedOptions: {
@@ -40,7 +44,14 @@ export type Collection = ShopifyCollection & {
   path: string;
 };
 
+export type ImageConnection = {
+  edges: {
+    node: Image;
+  }[];
+};
+
 export type Image = {
+  id?: string;
   url: string;
   altText: string;
   width: number;
@@ -70,7 +81,7 @@ export type Page = {
 
 export type Product = Omit<ShopifyProduct, "variants" | "images"> & {
   variants: ProductVariant[];
-  images: Image[];
+  images: ImageConnection;
 };
 
 export type ProductOption = {

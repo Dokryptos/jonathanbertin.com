@@ -55,31 +55,28 @@ mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
           node {
             id
             quantity
-            merchandise {
-              ... on ProductVariant {
-                id
-                title
-                image {
-                  url
-                }
-                priceV2 {
-                  amount
-                  currencyCode
-                }
-                product {
+              merchandise {
+                ... on ProductVariant {
                   id
                   title
-                  images(first: 1) {
-                    edges {
-                      node {
-                        url
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  product {
+                    id
+                    title
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                        }
                       }
                     }
                   }
                 }
-              }
+              }  
             }
-          }
         }
       }
     }
@@ -152,20 +149,20 @@ export const CART_QUERY = `
       id
       totalQuantity
       cost {
-        subtotalAmount {
-          amount
-          currencyCode
-        }
-        totalAmount {
-          amount
-          currencyCode
-        }
+        subtotalAmount { amount currencyCode }
+        totalAmount { amount currencyCode }
       }
       lines(first: 10) {
         edges {
           node {
             id
             quantity
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
             merchandise {
               ... on ProductVariant {
                 id
@@ -173,6 +170,17 @@ export const CART_QUERY = `
                 price {
                   amount
                   currencyCode
+                }
+                product {
+                  id
+                  title
+                  images(first: 1) {
+                    edges {
+                      node {
+                        url
+                      }
+                    }
+                  }
                 }
               }
             }

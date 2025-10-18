@@ -16,7 +16,7 @@ export default function CartWrapper() {
         className="flex items-center font-junicode"
       >
         <p className="text-[16px] desktop:text-[20px]">Cart</p>
-        <div className="text-[9px] pl-1 font-bagossTrial">{`(${cart.cart?.totalQuantity || 0})`}</div>
+        <div className="text-[12px] pl-1 font-bagossTrial">{`(${cart.cart?.totalQuantity || 0})`}</div>
       </button>
 
       <CartPopup isOpen={cartOpen} onClose={() => setCartOpen(false)} />
