@@ -31,8 +31,7 @@ export default function ShopComponent({ shopData }: ShopDataProps) {
               <p className="">Épuisé</p>
             ) : (
               <p className="">
-                {product.variants.edges[0]?.node.price.amount}€
-                {/* {product.variants.edges[0]?.node.price.currencyCode} */}
+                {product.variants.edges[0]?.node.price.amount}0€
               </p>
             )}
           </div>

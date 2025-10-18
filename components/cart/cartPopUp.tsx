@@ -49,7 +49,10 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
             </button>
             {/* Panier vide */}
             {!cart || cart.lines.length === 0 ? (
-              <p className="pt-56px">Votre panier est vide.</p>
+              <div className="pt-[56px]">
+                <p className="mb-6 font-bagossTrial">{`Panier (00)`}</p>
+                <p className="pt-56px mb-4">Votre panier est vide.</p>
+              </div>
             ) : (
               <div className="pt-[56px]">
                 <p className="mb-6 font-bagossTrial">{`Panier (${cart?.totalQuantity <= 9 ? `0${cart.totalQuantity}` : `${cart.totalQuantity}`}) `}</p>

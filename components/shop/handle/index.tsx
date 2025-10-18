@@ -22,7 +22,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           <span className="text-[9px] tarblet:text-[12px] pl-2">{`(0${productData.images.edges.length})`}</span>
         </div>
         <div className="text-[20px] pb-5 flex tablet:hidden">
-          €{productData.priceRange.minVariantPrice.amount}
+          €{productData.priceRange.minVariantPrice.amount}0
         </div>
         <CarousselMobile
           carousselGallery={productData.images.edges}
@@ -45,7 +45,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             <span className="text-[9px] tablet:text-[12px] pl-2">{`(${productData.images.edges.length <= 9 ? `0${productData.images.edges.length}` : `${productData.images.edges.length}`})`}</span>
           </div>
           <div className="text-[20px] pb-5 hidden tablet:flex">
-            €{productData.priceRange.minVariantPrice.amount}
+            €{productData.priceRange.minVariantPrice.amount}0
           </div>
           <div className="flex tablet:hidden pb-6">
             <AddToCartButton
@@ -62,7 +62,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             dangerouslySetInnerHTML={{ __html: productData.descriptionHtml }}
           />
           <div className="w-full justify-between items-center text-[16px] hidden tablet:flex">
-            <div>€{productData.priceRange.minVariantPrice.amount}</div>
+            <div>€{productData.priceRange.minVariantPrice.amount}0</div>
             {productData.availableForSale ||
             productData.variants.edges[0].node.quantityAvailable <= 0 ? (
               <p>Épuisé</p>
@@ -70,7 +70,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
               <AddToCartButton
                 variantId={productData.variants.edges[0].node.id}
               >
-                <button className="p-3 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
+                <button className="py-3 px-6 bg-white hover:bg-black text-black hover:text-white transition-all duration-200 border-1 border-black rounded-4xl underline">
                   Ajouter au panier
                 </button>
               </AddToCartButton>

@@ -17,7 +17,7 @@ export default function Navbar() {
           </Link>
           <div className="flex pt-2 gap-1">
             <Link
-              className={`${pathname.includes("/personnal") ? "italic laptop:text-[16.63px] desktop:text-[20.8px]" : "not-italic"} hover:italic hover:desktop:text-[20.8px] hover:laptop:text-[16.63px]`}
+              className={`${pathname.includes("/personnal") ? "italic desktop:text-[20.8px] laptop:text-[16.63px] " : "not-italic"} hover:italic hover:desktop:text-[20.8px] hover:laptop:text-[16.63px]`}
               href={"/personnal"}
             >
               Personal,
