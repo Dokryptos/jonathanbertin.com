@@ -103,12 +103,12 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           <h2 className="font-bagossTrial text-[16px]/[130%] pb-6">
             {productData?.title}
           </h2>
-          <p className="font-junicode whitespace-pre-wrap pb-[48px]">
+          <div className="font-junicode whitespace-pre-wrap pb-[48px]">
             <div
               className="text-[16px]/[130%] pb-5 font-junicode"
               dangerouslySetInnerHTML={{ __html: productData.descriptionHtml }}
             />
-          </p>
+          </div>
         </div>
       </PopUp>
     </>

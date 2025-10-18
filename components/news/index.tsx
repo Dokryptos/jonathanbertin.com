@@ -2,7 +2,7 @@
 import type NewsType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PersonnalProps {
   newsData: NewsType[];
@@ -11,12 +11,18 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
   const [isHovered, setIsHovered] = useState<null | string>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    const slider = scrollRef.current;
-    if (!slider) return;
-    e.preventDefault();
-    slider.scrollLeft += e.deltaY * 10;
-  };
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const slider = scrollRef.current;
+      if (!slider) return;
+      e.preventDefault();
+      slider.scrollLeft += e.deltaY;
+    };
+    window.addEventListener("wheel", (e: WheelEvent) => handleWheel(e), {
+      passive: false,
+    });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, []);
 
   return (
     <>
@@ -41,9 +47,8 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
         </div>
       </div>
       <div
-        className="hidden laptop:flex flex-row pl-5 h-dvh scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide select-none pr-2"
+        className="hidden laptop:flex flex-row pl-5 h-dvh overflow-x-auto overflow-y-hidden scrollbar-hide select-none pr-2"
         ref={scrollRef}
-        onWheel={handleWheel}
       >
         {newsData?.map((project, i) => (
           <Link

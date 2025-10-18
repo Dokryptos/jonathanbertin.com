@@ -53,7 +53,7 @@ export default function CartLine({ line }: { line: any }) {
             </button>
           </div>
           <p className="mt-1 text-sm">
-            {unitPrice} {currency}
+            {unitPrice}0 {currency}
           </p>
         </div>
       </div>
