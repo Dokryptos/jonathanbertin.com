@@ -26,12 +26,12 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
 
   return (
     <>
-      <div className="pt-[80px] laptop:pt-[0px] pl-5 pr-5 h-full flex laptop:hidden ">
+      <div className="pt-[80px] laptop:pt-[0px] pl-5 pr-5 pb-5 h-full flex laptop:hidden ">
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-7 tablet:gap-3 h-full laptop:hidden">
           {newsData.map((project: NewsType, i: number) => (
             <div
               key={project._id}
-              className={`w-full ${i === newsData.length ? "mb-5" : "mb-0"}`}
+              className={`w-full ${i === newsData.length - 1 ? "pb-5" : "pb-0"}`}
             >
               <Link href={`/news/${project?.slug?.current}`}>
                 <div className={`w-full aspect-[4/5] overflow-hidden`}>
