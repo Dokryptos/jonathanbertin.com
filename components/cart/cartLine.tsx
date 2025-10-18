@@ -29,14 +29,14 @@ export default function CartLine({ line }: { line: any }) {
           <button onClick={() => linesRemove([line.id || ""])}>✕</button>
         </div>
         <div className="flex justify-between">
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2 font-bagossTrial">
             <button
               onClick={() =>
                 linesUpdate([
                   { id: line.id || "", quantity: (line.quantity || 0) - 1 },
                 ])
               }
-              className="px-2 py-1 text-[#8F877A] hover:text-black"
+              className="px-2 py-1 text-[#8F877A] hover:text-black "
             >
               -
             </button>
@@ -52,8 +52,8 @@ export default function CartLine({ line }: { line: any }) {
               +
             </button>
           </div>
-          <p className="mt-1 text-sm">
-            {unitPrice}0 {currency}
+          <p className="mt-1 font-bagossTrial">
+            {unitPrice}0 €{/*{currency} */}
           </p>
         </div>
       </div>

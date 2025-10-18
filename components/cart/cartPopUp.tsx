@@ -54,9 +54,9 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                 })}
                 <div className="absolute bottom-5 flex flex-col w-full pr-10">
                   <div className="flex justify-between">
-                    <span>SOUS-TOTAL</span>
-                    <span>
-                      {cost?.totalAmount?.amount}
+                    <span className="font-bagossTrial">SOUS-TOTAL</span>
+                    <span className="font-bagossTrial">
+                      {cost?.totalAmount?.amount}0
                       {cost?.totalAmount?.currencyCode === "EUR" ? "€" : "$"}
                     </span>
                   </div>

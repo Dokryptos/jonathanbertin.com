@@ -21,7 +21,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
           {productData.title}
           <span className="text-[9px] tarblet:text-[12px] pl-2">{`(0${productData.images.edges.length})`}</span>
         </div>
-        <div className="text-[20px] pb-5 flex tablet:hidden">
+        <div className="text-[20px] pb-5 flex tablet:hidden font-bagossTrial">
           €{productData.priceRange.minVariantPrice.amount}0
         </div>
         <CarousselMobile
@@ -44,7 +44,7 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             {productData.title}
             <span className="text-[9px] tablet:text-[12px] pl-2">{`(${productData.images.edges.length <= 9 ? `0${productData.images.edges.length}` : `${productData.images.edges.length}`})`}</span>
           </div>
-          <div className="text-[20px] pb-5 hidden tablet:flex">
+          <div className="text-[20px] pb-5 hidden tablet:flex font-bagossTrial">
             €{productData.priceRange.minVariantPrice.amount}0
           </div>
           <div className="flex tablet:hidden pb-6">
@@ -62,7 +62,9 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             dangerouslySetInnerHTML={{ __html: productData.descriptionHtml }}
           />
           <div className="w-full justify-between items-center text-[16px] hidden tablet:flex">
-            <div>€{productData.priceRange.minVariantPrice.amount}0</div>
+            <div className="font-bagossTrial">
+              €{productData.priceRange.minVariantPrice.amount}0
+            </div>
             {productData.availableForSale ||
             productData.variants.edges[0].node.quantityAvailable <= 0 ? (
               <p>Épuisé</p>
