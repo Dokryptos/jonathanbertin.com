@@ -8,9 +8,21 @@ interface ShopDataProps {
 }
 
 export default function ShopComponent({ shopData }: ShopDataProps) {
+  const sortedShopData = [...shopData].sort((a, b) => {
+    const aQuantity = a.variants.edges[0]?.node?.quantityAvailable ?? 0;
+    const bQuantity = b.variants.edges[0]?.node?.quantityAvailable ?? 0;
+
+    const aSoldOut = aQuantity <= 0;
+    const bSoldOut = bQuantity <= 0;
+
+    if (aSoldOut && !bSoldOut) return 1; // a après b
+    if (!aSoldOut && bSoldOut) return -1; // a avant b
+    return 0;
+  });
+
   return (
     <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-4 pt-[80px] desktop:pt-[96px] gap-3 pr-5 pl-5">
-      {shopData.map((product) => (
+      {sortedShopData.map((product) => (
         <Link
           key={product.id}
           href={`/shop/${product.handle}`}

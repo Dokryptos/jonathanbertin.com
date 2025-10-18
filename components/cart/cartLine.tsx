@@ -9,7 +9,6 @@ export default function CartLine({ line }: { line: any }) {
   const product = merchandise?.product;
   const imageUrl = merchandise?.image?.url;
   const unitPrice = merchandise?.price?.amount || "0";
-  const currency = merchandise?.price?.currencyCode || "EUR";
 
   return (
     <div className="flex mb-4">
@@ -52,9 +51,7 @@ export default function CartLine({ line }: { line: any }) {
               +
             </button>
           </div>
-          <p className="mt-1 font-bagossTrial">
-            {unitPrice}0 €{/*{currency} */}
-          </p>
+          <p className="mt-1 font-bagossTrial">{unitPrice}0 €</p>
         </div>
       </div>
     </div>
