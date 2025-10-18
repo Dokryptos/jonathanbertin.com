@@ -61,7 +61,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${junicode.variable} ${bagossTrial.variable} antialiased font-junicode`}
+        className={`${junicode.variable} ${bagossTrial.variable} antialiased font-junicode text-[16px]/[130%]`}
       >
         <ViewModeProvider>
           <CartProvider>

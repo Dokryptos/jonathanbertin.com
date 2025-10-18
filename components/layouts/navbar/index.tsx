@@ -49,9 +49,7 @@ export default function Navbar() {
           >
             Shop
           </Link>
-          <div
-            className={`hover:italic hover:desktop:text-[18.7px] hover:laptop:text-[15.02px] leading-none`}
-          >
+          <div className={`leading-none`}>
             <CartWrapper />
           </div>
         </div>

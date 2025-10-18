@@ -48,7 +48,10 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
             €{productData.priceRange.minVariantPrice.amount}
           </div>
           <div className="flex tablet:hidden pb-6">
-            <AddToCartButton variantId={productData.variants.edges[0].node.id}>
+            <AddToCartButton
+              variantId={productData.variants.edges[0].node.id}
+              className="w-full"
+            >
               <button className="p-3 bg-black text-white border-1 border-black rounded-4xl w-full underline text-[16px]">
                 Ajouter au panier
               </button>

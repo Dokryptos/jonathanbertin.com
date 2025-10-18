@@ -80,36 +80,58 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const removeFromCart = async (lineId: string) => {
     if (!cart) return;
 
-    const variables: ShopifyRemoveFromCartOperation["variables"] = {
-      cartId: cart.id,
-      lineIds: [lineId],
-    };
-
+    const variables = { cartId: cart.id, lineIds: [lineId] };
     const result = await shopifyFetch<ShopifyRemoveFromCartOperation>(
       CART_LINES_REMOVE,
       variables
     );
 
+    if (!result?.data.cartLinesRemove?.cart) {
+      console.error("Erreur removeFromCart", result);
+      return;
+    }
+
     const updatedCart = mapShopifyCartToCart(result.data.cartLinesRemove.cart);
     setCart(updatedCart);
   };
 
-  // Met à jour la quantité d'une ligne
   const updateCartLine = async (lineId: string, quantity: number) => {
     if (!cart) return;
 
-    const variables: ShopifyUpdateCartOperation["variables"] = {
-      cartId: cart.id,
-      lines: [{ id: lineId, merchandiseId: "", quantity }], // merchId n'est pas toujours nécessaire pour update
-    };
+    const line = cart.lines.find((l) => l.id === lineId);
+    if (!line) return;
+
+    const merchandiseId = line.merchandise?.id;
+    if (!merchandiseId) {
+      console.error("❌ merchandiseId manquant pour la ligne", line);
+      return;
+    }
+
+    console.log(
+      "Update line:",
+      lineId,
+      "merchandiseId:",
+      merchandiseId,
+      "quantity:",
+      quantity
+    );
 
     const result = await shopifyFetch<ShopifyUpdateCartOperation>(
       CART_LINES_UPDATE,
-      variables
+      {
+        cartId: cart.id,
+        lines: [{ id: lineId, merchandiseId, quantity }],
+      }
     );
 
-    const updatedCart = mapShopifyCartToCart(result.data.cartLinesUpdate.cart);
-    setCart(updatedCart);
+    if (result?.data?.cartLinesUpdate?.cart) {
+      const updatedCart = mapShopifyCartToCart(
+        result.data.cartLinesUpdate.cart
+      );
+      setCart(updatedCart);
+    } else {
+      console.error("⚠️ Erreur updateCartLine:", result);
+    }
   };
 
   useEffect(() => {

@@ -196,7 +196,6 @@ export type ShopifyRemoveFromCartOperation = {
     lineIds: string[];
   };
 };
-
 export type ShopifyUpdateCartOperation = {
   data: {
     cartLinesUpdate: {
