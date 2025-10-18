@@ -20,7 +20,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
     if (quantity <= 1) return;
     updateCartLine(lineId, quantity - 1);
   };
-
+  console.log(cart);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -86,16 +86,16 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                             <div className="flex items-center justify-center gap-2">
                               <button
                                 onClick={() =>
-                                  decrement(line.id, line.quantity)
+                                  decrement(line?.id, line?.quantity)
                                 }
                                 className="px-2 py-1 text-[#8F877A] hover:text-black"
                               >
                                 -
                               </button>
-                              <span>{line.quantity}</span>
+                              <span>{line?.quantity}</span>
                               <button
                                 onClick={() =>
-                                  increment(line.id, line.quantity)
+                                  increment(line?.id, line?.quantity)
                                 }
                                 className="px-2 py-1 text-[#8F877A] hover:text-black"
                               >
@@ -115,13 +115,15 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                   <div className="flex justify-between">
                     <span>SOUS-TOTAL</span>
                     <span>
-                      {cart.cost?.totalAmount?.amount}
-                      {cart.cost.totalAmount.currencyCode === "EUR" ? "€" : "$"}
+                      {cart?.cost?.totalAmount?.amount}
+                      {cart?.cost?.totalAmount?.currencyCode === "EUR"
+                        ? "€"
+                        : "$"}
                     </span>
                   </div>
                   {cart && (
                     <button
-                      onClick={() => window.open(cart.checkoutUrl)}
+                      onClick={() => window.open(cart?.checkoutUrl)}
                       className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl"
                     >
                       Commander
