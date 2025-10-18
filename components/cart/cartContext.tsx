@@ -35,6 +35,10 @@ interface CartContextProps {
   addToCart: (variantId: string, quantity: number) => Promise<void>;
   removeFromCart: (lineId: string) => Promise<void>;
   updateCartLine: (lineId: string, quantity: number) => Promise<void>;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  toggleCart: () => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -42,13 +46,17 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<Cart | null>(null);
 
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+  const toggleCart = () => setIsCartOpen((prev) => !prev);
   // Crée un nouveau panier si aucun cartId en localStorage
   const createCart = async () => {
     const data = await shopifyFetch<{
       cartCreate: { cart: ShopifyCart };
     }>(CART_CREATE, { input: { lines: [] } });
     const newCart = mapShopifyCartToCart(data.cartCreate.cart);
-    console.log(newCart);
     localStorage.setItem("shopify_cart_id", newCart.id);
     setCart(newCart);
   };
@@ -86,12 +94,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       variables
     );
 
-    if (!result?.data.cartLinesRemove?.cart) {
+    if (!result?.cartLinesRemove?.cart) {
       console.error("Erreur removeFromCart", result);
       return;
     }
 
-    const updatedCart = mapShopifyCartToCart(result.data.cartLinesRemove.cart);
+    const updatedCart = mapShopifyCartToCart(result.cartLinesRemove.cart);
     setCart(updatedCart);
   };
 
@@ -120,14 +128,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       CART_LINES_UPDATE,
       {
         cartId: cart.id,
-        lines: [{ id: lineId, merchandiseId, quantity }],
+        lines: [{ id: lineId, quantity }],
       }
     );
 
-    if (result?.data?.cartLinesUpdate?.cart) {
-      const updatedCart = mapShopifyCartToCart(
-        result.data.cartLinesUpdate.cart
-      );
+    if (result?.cartLinesUpdate?.cart) {
+      const updatedCart = mapShopifyCartToCart(result.cartLinesUpdate.cart);
       setCart(updatedCart);
     } else {
       console.error("⚠️ Erreur updateCartLine:", result);
@@ -135,6 +141,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
+    let mounted = true;
     const cartId = localStorage.getItem("shopify_cart_id");
 
     const initCart = async () => {
@@ -149,7 +156,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         const data = await shopifyFetch<{ cart: ShopifyCart }>(CART_QUERY, {
           cartId,
         });
-        setCart(mapShopifyCartToCart(data.cart));
+        if (mounted) setCart(mapShopifyCartToCart(data.cart));
       } catch (error) {
         console.error("Impossible de récupérer le cart existant", error);
         localStorage.removeItem("shopify_cart_id"); // Si le cart est invalide
@@ -158,11 +165,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     initCart();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
     <CartContext.Provider
-      value={{ cart, createCart, addToCart, removeFromCart, updateCartLine }}
+      value={{
+        cart,
+        createCart,
+        addToCart,
+        removeFromCart,
+        updateCartLine,
+        isCartOpen,
+        openCart,
+        closeCart,
+        toggleCart,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -4,14 +4,14 @@
 //   lines: { merchandiseId: string; quantity: number }[]
 // ) {
 //   const query = `
-//     mutation checkoutCreate($input: CheckoutCreateInput!) {
-//       checkoutCreate(input: $input) {
+//      mutation checkoutCreate($input: CheckoutCreateInput!) {
+//        checkoutCreate(input: $input) {
 //         checkout {
-//           id
-//           webUrl
+//            id
+//            webUrl
 //         }
-//       }
-//     }
+//        }
+//      }
 //   `;
 
 //   const data = await shopifyFetch(query, {

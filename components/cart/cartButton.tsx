@@ -17,12 +17,12 @@ export default function AddToCartButton({
   children,
   className = "",
 }: AddToCartButtonProps) {
-  const { addToCart, cart } = useCart();
+  const { addToCart, cart, openCart } = useCart();
 
   const handleClick = async () => {
     try {
       await addToCart(variantId, quantity);
-
+      openCart();
       // si l'utilisateur veut aller directement au checkout
       if (redirectToCheckout && cart?.checkoutUrl) {
         window.location.href = cart.checkoutUrl;

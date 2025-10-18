@@ -12,9 +12,13 @@ interface CartPopupProps {
 export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
   const { cart, removeFromCart, updateCartLine } = useCart();
 
-  const handleQuantityChange = (lineId: string, quantity: number) => {
-    if (quantity < 1) return;
-    updateCartLine(lineId, quantity);
+  const increment = (lineId: string, quantity: number) => {
+    updateCartLine(lineId, quantity + 1);
+  };
+
+  const decrement = (lineId: string, quantity: number) => {
+    if (quantity <= 1) return;
+    updateCartLine(lineId, quantity - 1);
   };
 
   return (
@@ -76,19 +80,24 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                             </button>
                           </div>
                           <div className="flex justify-between">
-                            <div className="flex flex-col items-end gap-2">
-                              <input
-                                type="number"
-                                min={1}
-                                value={line.quantity}
-                                onChange={(e) =>
-                                  handleQuantityChange(
-                                    line.id,
-                                    Number(e.target.value)
-                                  )
+                            <div className="flex items-center justify-center gap-2">
+                              <button
+                                onClick={() =>
+                                  decrement(line.id, line.quantity)
                                 }
-                                className="w-16 border text-center"
-                              />
+                                className="px-2 py-1 text-[#8F877A] hover:text-black"
+                              >
+                                -
+                              </button>
+                              <span>{line.quantity}</span>
+                              <button
+                                onClick={() =>
+                                  increment(line.id, line.quantity)
+                                }
+                                className="px-2 py-1 text-[#8F877A] hover:text-black"
+                              >
+                                +
+                              </button>
                             </div>
                             <p className="mt-1 text-sm">
                               {unitPrice} {currency}
@@ -103,15 +112,16 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                   <div className="flex justify-between">
                     <span>SOUS-TOTAL</span>
                     <span>
-                      {cart.cost.totalAmount.amount}
+                      {cart.cost?.totalAmount?.amount}
                       {cart.cost.totalAmount.currencyCode === "EUR" ? "€" : "$"}
                     </span>
                   </div>
                   {cart && (
-                    <button className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl">
-                      <a href={cart.checkoutUrl} className="">
-                        Commander
-                      </a>
+                    <button
+                      onClick={() => window.open(cart.checkoutUrl)}
+                      className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl"
+                    >
+                      Commander
                     </button>
                   )}
                 </div>

@@ -169,8 +169,9 @@ export type ShopifyCreateCartOperation = {
 };
 
 export type ShopifyAddToCartOperation = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cartLinesAdd: any;
+  cartLinesAdd: {
+    cart: ShopifyCart;
+  };
   data: {
     cartLinesAdd: {
       cart: ShopifyCart;
@@ -186,6 +187,9 @@ export type ShopifyAddToCartOperation = {
 };
 
 export type ShopifyRemoveFromCartOperation = {
+  cartLinesRemove: {
+    cart: ShopifyCart;
+  };
   data: {
     cartLinesRemove: {
       cart: ShopifyCart;
@@ -197,6 +201,9 @@ export type ShopifyRemoveFromCartOperation = {
   };
 };
 export type ShopifyUpdateCartOperation = {
+  cartLinesUpdate: {
+    cart: ShopifyCart;
+  };
   data: {
     cartLinesUpdate: {
       cart: ShopifyCart;
@@ -209,35 +216,6 @@ export type ShopifyUpdateCartOperation = {
       merchandiseId: string;
       quantity: number;
     }[];
-  };
-};
-
-export type ShopifyCollectionOperation = {
-  data: {
-    collection: ShopifyCollection;
-  };
-  variables: {
-    handle: string;
-  };
-};
-
-export type ShopifyCollectionProductsOperation = {
-  data: {
-    collection: {
-      products: Connection<ShopifyProduct>;
-    };
-  };
-  variables: {
-    handle: string;
-    reverse?: boolean;
-    sortKey?: string;
-    locale?: string;
-  };
-};
-
-export type ShopifyCollectionsOperation = {
-  data: {
-    collections: Connection<ShopifyCollection>;
   };
 };
 
@@ -272,15 +250,6 @@ export type ShopifyProductOperation = {
   data: { product: ShopifyProduct };
   variables: {
     handle: string;
-  };
-};
-
-export type ShopifyProductRecommendationsOperation = {
-  data: {
-    productRecommendations: ShopifyProduct[];
-  };
-  variables: {
-    productId: string;
   };
 };
 
