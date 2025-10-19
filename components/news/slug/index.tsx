@@ -21,7 +21,10 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
       />
       <div className="hidden tablet:flex flex-col h-full tablet:max-h-[calc(100vh-80px)] desktop:max-h-[calc(100vh-96px)] overflow-y-auto scrollbar-hide pr-[6px] laptop:pr-6 desktop:pr-[65px] gap-3">
         {selectedNewsData.gallery.map((image, i) => (
-          <div key={i} className="w-full hidden tablet:block">
+          <div
+            key={i}
+            className={`w-full hidden tablet:block ${i === selectedNewsData.gallery.length - 1 ? "pb-5 " : "pb-0"}`}
+          >
             <UIImageSanity
               asset={image}
               alt={selectedNewsData?._id}
