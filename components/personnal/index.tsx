@@ -27,6 +27,7 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
       scrollableElement.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [viewMode]);
+
   const gridAnimationVariant = {
     hidden: { opacity: 0 },
     visible: (i: number) => ({

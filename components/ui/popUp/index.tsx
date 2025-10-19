@@ -41,7 +41,10 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
             </div>
 
             <div className="sticky bottom-0 right-0 w-full bg-white pt-3 pb-3 pr-5 pl-5 flex justify-end z-50">
-              <button className="p-1 text-[16px]/[16px]" onClick={onClose}>
+              <button
+                className="p-1 text-[16px]/[130%] desktop:text-[20px]/[130%]"
+                onClick={onClose}
+              >
                 Informations
               </button>
             </div>

@@ -77,7 +77,7 @@ export default function CommissionedComponent({
                   )
                 )}
               </Grid>
-              <div className="hidden laptop:flex laptop:fixed bottom-2 left-5 z-60 text-[16px]/[130%]">
+              <div className="hidden laptop:flex laptop:fixed bottom-2 left-5 z-60 text-[16px]/[130%] desktop:text-[20px]/[130%]">
                 {hoveredImageTitle}
               </div>
             </>
