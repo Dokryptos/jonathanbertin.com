@@ -24,7 +24,6 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
             onClick={onClose}
           />
 
-          {/* Cart container */}
           <motion.div
             className="fixed top-0 right-0 h-full w-4/5 tablet:w-1/2 laptop:w-2/5 desktop:w-1/3 bg-white z-50 flex flex-col scrollbar-hide pr-5 pl-5"
             initial={{ x: "100%" }}
@@ -38,7 +37,6 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
             >
               ✕
             </button>
-            {/* Panier vide */}
             {!lines || lines.length === 0 ? (
               <div className="pt-[56px]">
                 <p className="mb-6 font-bagossTrial">{`Panier (00)`}</p>

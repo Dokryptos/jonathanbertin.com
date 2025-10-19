@@ -15,7 +15,6 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
     const handleWheel = (e: WheelEvent) => {
       const slider = scrollRef.current;
       if (!slider) return;
-      e.preventDefault();
       slider.scrollLeft += e.deltaY;
     };
     window.addEventListener("wheel", (e: WheelEvent) => handleWheel(e), {

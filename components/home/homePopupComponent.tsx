@@ -10,7 +10,7 @@ export default function HomePopUpComponent() {
   return (
     <>
       <div
-        className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5 font-junicode z-30`}
+        className={`fixed bottom-0 w-dvw bg-white pr-5 pl-5 font-junicode z-20`}
       >
         <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px] ">
           <div className="flex">
