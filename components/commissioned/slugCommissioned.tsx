@@ -31,7 +31,7 @@ export default function SlugCommissionedComponent({
     <>
       <div
         ref={scrollRef}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none touch-pan-x"
       >
         {slugProject?.gallery?.map((image, i: number) => (
           <div
