@@ -63,7 +63,7 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
             <UIImageSanity
               asset={project.thumbnail.asset}
               alt={project?._id}
-              className="w-full h-auto laptop:h-2/3 desktop:h-3/5"
+              className="h-auto laptop:h-2/3 desktop:h-3/5"
             />
             <div className="pt-3 h-[10px]">
               {isHovered === project._id && (
