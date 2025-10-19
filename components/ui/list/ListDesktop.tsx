@@ -7,9 +7,13 @@ import { useState } from "react";
 
 interface ListDesktopProps {
   projectArray: ProjectType[];
+  linkProject: string;
 }
 
-export default function ListDesktop({ projectArray }: ListDesktopProps) {
+export default function ListDesktop({
+  projectArray,
+  linkProject,
+}: ListDesktopProps) {
   const [hoveredImage, setHoveredImage] = useState<SanityImage | null>(
     projectArray[0].thumbnail
   );
@@ -45,7 +49,7 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
             setHoveredLink(project.slug.current);
           }}
         >
-          <Link href={`/${project?.slug?.current}`}>
+          <Link href={`/${linkProject}/${hoveredLink}`}>
             <h2
               className={`z-10 mix-blend-difference relative flex desktop:text-[20px]/[20px] laptop:text-[16px] pt-1 pb-1 w-auto ${hoveredImageId === project._id ? "text-white" : "text-[#474747]"}`}
             >
@@ -58,7 +62,7 @@ export default function ListDesktop({ projectArray }: ListDesktopProps) {
         </motion.div>
       ))}
       {hoveredImage && (
-        <Link href={`/${hoveredLink}`}>
+        <Link href={`/${linkProject}/${hoveredLink}`}>
           <UIImageSanity
             key={hoveredImageId}
             asset={hoveredImage}

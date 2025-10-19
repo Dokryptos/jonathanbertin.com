@@ -83,10 +83,14 @@ export default function CommissionedComponent({
             </>
           ) : (
             <>
-              <ListDesktop projectArray={commissionedData} />
+              <ListDesktop
+                projectArray={commissionedData}
+                linkProject="commissioned"
+              />
               <ListMobile
                 projectArray={commissionedData}
                 scrollRef={scrollRef}
+                linkProject="commissioned"
               />
             </>
           )}

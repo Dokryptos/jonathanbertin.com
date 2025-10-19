@@ -30,7 +30,7 @@ export const MobileHomeComponent = ({ homeData }: HomeDataProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.1, ease: "easeInOut" }}
+          transition={{ duration: 0, ease: "easeInOut" }}
           className="w-auto h-auto flex items-center justify-center col-span-full tablet:col-span-6 tablet:col-start-3"
         >
           <UIImageSanity

@@ -5,14 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import PopUp from "../ui/popUp";
 
 interface SlugProps {
-  allProjectData: ProjectType[];
+  allCommissionedData: ProjectType[];
 }
 
-export default function SlugComponent({ allProjectData }: SlugProps) {
+export default function SlugCommissionedComponent({
+  allCommissionedData,
+}: SlugProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-
+  console.log(allCommissionedData);
   const [infoOpen, setInfoOpen] = useState(false);
-  const slugProject = allProjectData[0];
+  const slugProject = allCommissionedData[0];
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
@@ -20,7 +22,9 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
       if (!slider) return;
       slider.scrollLeft += e.deltaY;
     };
-    window.addEventListener("wheel", (e: WheelEvent) => handleWheel(e), { passive: false });
+    window.addEventListener("wheel", (e: WheelEvent) => handleWheel(e), {
+      passive: false,
+    });
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
@@ -47,7 +51,7 @@ export default function SlugComponent({ allProjectData }: SlugProps) {
         <div className="flex justify-between pt-4 pb-4 text-[16px]/[18px] desktop:text-[20px]">
           <div className="flex">
             <p className="pr-2">{slugProject?.title}</p>
-            <p className="text-[9px]">{`(${slugProject?.gallery?.length <= 9 ? `0${slugProject?.gallery?.length}` : `${slugProject?.gallery?.length}`})`}</p>
+            <p className="text-[9px] desktop:text-[12px]">{`(${slugProject?.gallery?.length <= 9 ? `0${slugProject?.gallery?.length}` : `${slugProject?.gallery?.length}`})`}</p>
           </div>
           <button
             onClick={() => {

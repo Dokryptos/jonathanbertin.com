@@ -1,15 +1,14 @@
-import SlugComponent from "@/components/slug";
+import SlugPersonnalComponent from "@/components/personnal/slugPersonnal";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 import { defineQuery } from "next-sanity";
-import { sanityFetch } from "./../../sanity/lib/live";
+import { sanityFetch } from "./../../../sanity/lib/live";
 
 const PROJECT_QUERY = defineQuery(`
 *[
-  _type == "personal" && slug.current == $slug || _type == "commissioned" && slug.current == $slug
-] | order(orderRank) {_id, title,  thumbnail, slug, gallery, description}`);
+  _type == "personal" && slug.current == $slug ] | order(orderRank) {_id, title,  thumbnail, slug, gallery, description}`);
 
-export default async function SlugPage({
+export default async function SlugPersonnalPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -21,5 +20,5 @@ export default async function SlugPage({
   if (!allProjectData) {
     throw new Error("No data");
   }
-  return <SlugComponent allProjectData={allProjectData} />;
+  return <SlugPersonnalComponent allPersonnalProjectData={allProjectData} />;
 }

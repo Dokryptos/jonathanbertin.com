@@ -14,11 +14,13 @@ import { useRouter } from "next/navigation";
 interface ListMobileProps {
   projectArray: ProjectType[];
   scrollRef: RefObject<HTMLDivElement | null>;
+  linkProject: string;
 }
 
 export default function ListMobile({
   projectArray,
   scrollRef,
+  linkProject,
 }: ListMobileProps) {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const projectHeight = 300;
@@ -128,7 +130,7 @@ export default function ListMobile({
             variants={listAnimationVariant}
           >
             <h2
-              data-href={`/${project?.slug?.current}`}
+              data-href={`/${linkProject}/${project?.slug?.current}`}
               className={`z-20 mix-blend-difference relative flex text-[16px]/[16px] pt-1 pb-1 ${projectArray[selectedIndex]?._id === project._id ? "text-white z-20" : "text-[#474747]"}`}
             >
               {project?.title}

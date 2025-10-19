@@ -56,7 +56,7 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
                     className="w-full overflow-hidden"
                   >
                     <Link
-                      href={`/${project?.slug?.current}`}
+                      href={`/personnal/${project?.slug?.current}`}
                       onMouseEnter={() => {
                         setHoveredImageTitle(project.title);
                       }}
@@ -80,8 +80,15 @@ export default function PersonnalComponent({ personnalData }: PersonnalProps) {
             </>
           ) : (
             <>
-              <ListDesktop projectArray={personnalData} />
-              <ListMobile projectArray={personnalData} scrollRef={scrollRef} />
+              <ListDesktop
+                projectArray={personnalData}
+                linkProject="personnal"
+              />
+              <ListMobile
+                projectArray={personnalData}
+                scrollRef={scrollRef}
+                linkProject="personnal"
+              />
             </>
           )}
         </div>
