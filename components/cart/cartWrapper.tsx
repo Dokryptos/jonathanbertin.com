@@ -22,7 +22,10 @@ function CartButton() {
   const { totalQuantity = 0 } = useCart();
 
   return (
-    <button onClick={toggleCart} className="flex items-center font-junicode">
+    <button
+      onClick={toggleCart}
+      className="flex items-center font-junicode cursor-pointer"
+    >
       <p className="text-[16px] desktop:text-[20px]">Cart</p>
       <div className="text-[12px] pl-1 font-bagossTrial">
         ({totalQuantity <= 9 ? `0${totalQuantity}` : `${totalQuantity}`})

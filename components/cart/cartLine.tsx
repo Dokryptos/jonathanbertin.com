@@ -25,7 +25,12 @@ export default function CartLine({ line }: { line: any }) {
       <div className="flex flex-col w-full h-auto justify-between pl-3">
         <div className="flex justify-between">
           <p>{product?.title}</p>
-          <button onClick={() => linesRemove([line.id || ""])}>✕</button>
+          <button
+            className="cursor-pointer"
+            onClick={() => linesRemove([line.id || ""])}
+          >
+            ✕
+          </button>
         </div>
         <div className="flex justify-between">
           <div className="flex items-center justify-center gap-2 font-bagossTrial">
@@ -35,7 +40,7 @@ export default function CartLine({ line }: { line: any }) {
                   { id: line.id || "", quantity: (line.quantity || 0) - 1 },
                 ])
               }
-              className="px-2 py-1 text-[#8F877A] hover:text-black "
+              className="px-2 py-1 text-[#8F877A] hover:text-black cursor-pointer"
             >
               -
             </button>
@@ -46,7 +51,7 @@ export default function CartLine({ line }: { line: any }) {
                   { id: line.id || "", quantity: (line.quantity || 0) + 1 },
                 ])
               }
-              className="px-2 py-1 text-[#8F877A] hover:text-black"
+              className="px-2 py-1 text-[#8F877A] hover:text-black cursor-pointer"
             >
               +
             </button>

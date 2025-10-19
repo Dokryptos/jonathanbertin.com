@@ -7,9 +7,15 @@ type PopUpProps = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  footerName: string;
 };
 
-export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
+export default function PopUp({
+  isOpen,
+  onClose,
+  children,
+  footerName,
+}: PopUpProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -36,7 +42,7 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
               ✕
             </button>
 
-            <div className="flex-1 overflow-y-auto px-5 pt-10 pb-16">
+            <div className="flex-1 overflow-y-auto px-5 pt-[56px] pb-16">
               {children}
             </div>
 
@@ -45,7 +51,7 @@ export default function PopUp({ isOpen, onClose, children }: PopUpProps) {
                 className="p-1 text-[16px]/[130%] desktop:text-[20px]/[130%]"
                 onClick={onClose}
               >
-                Informations
+                {footerName}
               </button>
             </div>
           </motion.div>

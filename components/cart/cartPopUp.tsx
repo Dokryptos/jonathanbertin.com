@@ -34,7 +34,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
           >
             <button
               onClick={onClose}
-              className="absolute top-3 right-5 text-black p-1 z-50"
+              className="absolute top-3 right-5 text-black p-1 z-50 cursor-pointer"
             >
               ✕
             </button>
@@ -63,7 +63,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                   {checkoutUrl && (
                     <button
                       onClick={() => window.open(checkoutUrl, "_blank")}
-                      className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl"
+                      className="mt-5 w-full text-center py-3 bg-black text-white rounded-3xl cursor-pointer"
                     >
                       Commander
                     </button>

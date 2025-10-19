@@ -12,7 +12,6 @@ export default function SlugCommissionedComponent({
   allCommissionedData,
 }: SlugProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  console.log(allCommissionedData);
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allCommissionedData[0];
 
@@ -63,8 +62,12 @@ export default function SlugCommissionedComponent({
           </button>
         </div>
       </div>
-      <PopUp isOpen={infoOpen} onClose={() => setInfoOpen(false)}>
-        <div className="pt-[46px]">
+      <PopUp
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        footerName="Informations"
+      >
+        <div>
           <h2 className="font-bagossTrial text-[16px]/[130%] pb-6">
             {slugProject?.title}
           </h2>

@@ -12,7 +12,6 @@ export default function SlugPersonnalComponent({
   allPersonnalProjectData,
 }: SlugProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  console.log(allPersonnalProjectData);
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allPersonnalProjectData[0];
 
@@ -63,8 +62,12 @@ export default function SlugPersonnalComponent({
           </button>
         </div>
       </div>
-      <PopUp isOpen={infoOpen} onClose={() => setInfoOpen(false)}>
-        <div className="pt-[46px]">
+      <PopUp
+        isOpen={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        footerName="Informations"
+      >
+        <div>
           <h2 className="font-bagossTrial text-[16px]/[130%] pb-6">
             {slugProject?.title}
           </h2>

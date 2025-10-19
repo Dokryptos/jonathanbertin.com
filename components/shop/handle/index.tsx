@@ -2,8 +2,6 @@
 
 import { ShopifyProduct } from "@/lib/shopify/types";
 import CarousselMobile from "./carrousselMobile";
-import { useState } from "react";
-import PopUp from "@/components/ui/popUp";
 import AddToCartButton from "@/components/cart/cartButton";
 /* eslint-disable @next/next/no-img-element */
 
@@ -12,8 +10,6 @@ interface ProductDataProps {
 }
 
 export default function ShopHandleComponent({ productData }: ProductDataProps) {
-  const [infoOpen, setInfoOpen] = useState<boolean>(false);
-
   return (
     <>
       <div className="grid grid-cols-1 tablet:grid-cols-2 pt-[80px] desktop:pt-[96px] pl-5 pr-5">
@@ -90,29 +86,8 @@ export default function ShopHandleComponent({ productData }: ProductDataProps) {
               <p className="underline ">Ajouter au panier</p>
             </AddToCartButton>
           )}
-          <button
-            onClick={() => {
-              setInfoOpen(!infoOpen);
-            }}
-            className="cursor-pointer"
-          >
-            Informations
-          </button>
         </div>
       </div>
-      <PopUp isOpen={infoOpen} onClose={() => setInfoOpen(false)}>
-        <div className="pt-[46px]">
-          <h2 className="font-bagossTrial text-[16px]/[130%] pb-6">
-            {productData?.title}
-          </h2>
-          <div className="font-junicode whitespace-pre-wrap pb-[48px]">
-            <div
-              className="text-[16px]/[130%] pb-5 font-junicode"
-              dangerouslySetInnerHTML={{ __html: productData.descriptionHtml }}
-            />
-          </div>
-        </div>
-      </PopUp>
     </>
   );
 }
