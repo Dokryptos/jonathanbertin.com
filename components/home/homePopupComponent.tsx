@@ -6,6 +6,31 @@ import Image from "next/image";
 
 export default function HomePopUpComponent() {
   const [infoOpen, setInfoOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      setMessage(data.message);
+    } catch (error) {
+      setMessage("Erreur d’inscription.");
+    } finally {
+      setLoading(false);
+      setEmail("");
+    }
+  };
 
   return (
     <>
@@ -48,12 +73,18 @@ export default function HomePopUpComponent() {
             Newletter
           </h2>
           <p className="pb-3">Abonnez-vous à la newsletter ici :</p>
-          <div className="flex justify-start border-1 rounded-4xl w-full mb-6">
+          <form
+            className="flex justify-start border-1 rounded-4xl w-full mb-6"
+            onSubmit={handleSubmit}
+          >
             <input
+              type="email"
+              required
               placeholder="Entrez votre adresse email... "
+              onChange={(e) => setEmail(e.target.value)}
               className=" pl-6"
             />
-            <button>
+            <button disabled={loading} type="submit">
               <Image
                 src={Arrow}
                 alt="arrow"
@@ -61,7 +92,7 @@ export default function HomePopUpComponent() {
                 className="h-12 w-12 ml-[2px] p-2 cursor-pointer"
               />
             </button>
-          </div>
+          </form>
           <div className="pb-6">
             <h2 className="font-bagossTrial text-[16px]/[130%] pb-3">
               Follow me
