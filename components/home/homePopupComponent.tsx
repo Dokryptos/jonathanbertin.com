@@ -25,7 +25,7 @@ export default function HomePopUpComponent() {
       const data = await res.json();
       setMessage(data.message);
     } catch (error) {
-      setMessage("Erreur d’inscription.");
+      setMessage(`Erreur d’inscription. ${error}`);
     } finally {
       setLoading(false);
       setEmail("");
@@ -56,7 +56,7 @@ export default function HomePopUpComponent() {
         onClose={() => setInfoOpen(false)}
         footerName="Contact"
       >
-        <div className="pb-3">
+        <div className="pb-5">
           <h2 className="font-bagossTrial text-[16px]/[130%] pb-3">Contact</h2>
           <p>Jonathan Bertin</p>
           <p>Photographe & Directeur Artistique</p>
@@ -74,15 +74,16 @@ export default function HomePopUpComponent() {
           </h2>
           <p className="pb-3">Abonnez-vous à la newsletter ici :</p>
           <form
-            className="flex justify-start border-1 rounded-4xl w-full mb-6"
+            className="flex justify-start border-1 rounded-4xl w-full mb-3 tablet:mb-6"
             onSubmit={handleSubmit}
           >
             <input
               type="email"
               required
+              value={email}
               placeholder="Entrez votre adresse email... "
               onChange={(e) => setEmail(e.target.value)}
-              className=" pl-6"
+              className="pl-6"
             />
             <button disabled={loading} type="submit">
               <Image
@@ -91,9 +92,11 @@ export default function HomePopUpComponent() {
                 unoptimized
                 className="h-12 w-12 ml-[2px] p-2 cursor-pointer"
               />
+              {loading ? "Envoi..." : "S’inscrire"}
             </button>
+            {message && <p>{message}</p>}
           </form>
-          <div className="pb-6">
+          <div className="pb-3 tablet:pb-6">
             <h2 className="font-bagossTrial text-[16px]/[130%] pb-3">
               Follow me
             </h2>
