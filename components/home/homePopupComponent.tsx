@@ -7,31 +7,29 @@ import Image from "next/image";
 export default function HomePopUpComponent() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<null | "success" | "error">(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage("");
+    setStatus(null);
 
     try {
-      const res = await fetch("/api/newsletter", {
+      const req = await fetch("/api/newsletter/route.ts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
-      const data = await res.json();
-      setMessage(data.message);
-    } catch (error) {
-      setMessage(`Erreur d’inscription. ${error}`);
-    } finally {
-      setLoading(false);
-      setEmail("");
+      console.log(process.env.NEXT_API_BREVO_KEY);
+      if (req.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
     }
   };
-
   return (
     <>
       <div
@@ -85,16 +83,17 @@ export default function HomePopUpComponent() {
               onChange={(e) => setEmail(e.target.value)}
               className="pl-6"
             />
-            <button disabled={loading} type="submit">
+            <button type="submit">
               <Image
                 src={Arrow}
                 alt="arrow"
                 unoptimized
                 className="h-12 w-12 ml-[2px] p-2 cursor-pointer"
               />
-              {loading ? "Envoi..." : "S’inscrire"}
             </button>
-            {message && <p>{message}</p>}
+            {status === "success" && (
+              <p className="text-green-600 pt-2">Merci ! Vous êtes inscrit.</p>
+            )}
           </form>
           <div className="pb-3 tablet:pb-6">
             <h2 className="font-bagossTrial text-[16px]/[130%] pb-3">
