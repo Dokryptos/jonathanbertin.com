@@ -14,12 +14,11 @@ export default function HomePopUpComponent() {
     setStatus(null);
 
     try {
-      const req = await fetch("/api/newsletter/route.ts", {
+      const req = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      console.log(process.env.NEXT_API_BREVO_KEY);
       if (req.ok) {
         setStatus("success");
         setEmail("");
