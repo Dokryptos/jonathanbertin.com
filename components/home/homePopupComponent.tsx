@@ -71,7 +71,7 @@ export default function HomePopUpComponent() {
           </h2>
           <p className="pb-3">Abonnez-vous à la newsletter ici :</p>
           <form
-            className="flex justify-start border-1 rounded-4xl w-full mb-3 tablet:mb-6"
+            className="flex justify-start border-1 rounded-4xl w-full mb-6"
             onSubmit={handleSubmit}
           >
             <input

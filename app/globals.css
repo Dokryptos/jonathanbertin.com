@@ -50,3 +50,9 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
