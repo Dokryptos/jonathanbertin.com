@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import { CartProvider } from "@/components/cart/cartContext";
 import ProviderShopify from "@/components/layouts/providers/shopify";
+import Favicon from "../public/favicon.ico";
 
 const junicode = localFont({
   src: [
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
   title: "Jonathan Bertin",
   description:
     "Jonathan Bertin - Portfolio website of a French photographer based in Paris.",
-  // icons: {
-  //   icon: [{ rel: "icon", url: Favicon.src }],
-  // },
+  icons: {
+    icon: [{ rel: "icon", url: Favicon.src }],
+  },
   openGraph: {
     title: "Jonathan Bertin",
     description: "Jonathan Bertin",
