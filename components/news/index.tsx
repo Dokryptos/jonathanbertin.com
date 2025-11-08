@@ -65,9 +65,9 @@ export default function NewsComponent({ newsData }: PersonnalProps) {
               alt={project?._id}
               className="h-auto laptop:h-2/3 desktop:h-3/5"
             />
-            <div className="pt-3 h-[10px]">
+            <div className="pt-3 h-[10px] ">
               {isHovered === project._id && (
-                <div className="font-bagossTrial text-[16px]">
+                <div className="font-bagossTrial text-[16px] w-[200px] desktop:w-[250px]">
                   {project.title}
                 </div>
               )}

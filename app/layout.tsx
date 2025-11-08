@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import { CartProvider } from "@/components/cart/cartContext";
 import ProviderShopify from "@/components/layouts/providers/shopify";
-import Favicon from "../public/favicon.ico";
+import Favicon from "@/app/favicon.ico";
 
 const junicode = localFont({
   src: [
