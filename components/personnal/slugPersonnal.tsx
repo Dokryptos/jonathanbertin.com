@@ -1,8 +1,9 @@
 "use client";
 import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PopUp from "../ui/popUp";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface SlugProps {
   allPersonnalProjectData: ProjectType[];
@@ -14,6 +15,34 @@ export default function SlugPersonnalComponent({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allPersonnalProjectData[0];
+  
+    const preloadingKey = useMemo(() => {
+      if (!allPersonnalProjectData?.length) return;
+  
+      return allPersonnalProjectData
+        .map((data) => {
+          const ref = data?.thumbnail?.asset?._ref;
+          if (!ref) return null;
+          try {
+            return urlForImage(ref).url();
+          } catch {
+            return null;
+          }
+        })
+        .filter(Boolean)
+        .join(".");
+    }, [allPersonnalProjectData]);
+  
+    useEffect(() => {
+      if (!allPersonnalProjectData?.length) return;
+  
+      allPersonnalProjectData.forEach((asset) => {
+        const ref = asset?.thumbnail?.asset?._ref;
+        if (!ref) return;
+        const img = new Image();
+        img.src = urlForImage(ref).url();
+      });
+    }, [preloadingKey, allPersonnalProjectData]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {

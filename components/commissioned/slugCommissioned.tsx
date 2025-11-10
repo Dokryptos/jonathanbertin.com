@@ -1,8 +1,9 @@
 "use client";
 import type ProjectType from "@/types/project";
 import { UIImageSanity } from "../ui/image/sanity";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PopUp from "../ui/popUp";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface SlugProps {
   allCommissionedData: ProjectType[];
@@ -14,6 +15,33 @@ export default function SlugCommissionedComponent({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allCommissionedData[0];
+
+  const preloadingKey = useMemo(() => {
+    if (!allCommissionedData?.length) return;
+      return allCommissionedData
+      .map((data) => {
+        const ref = data?.thumbnail?.asset?._ref;
+        if (!ref) return null;
+        try {
+          return urlForImage(ref).url();
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .join(".");
+  }, [allCommissionedData]);
+  
+
+  useEffect(() => {
+    if (!allCommissionedData?.length) return;
+      allCommissionedData.forEach((asset) => {
+      const ref = asset?.thumbnail?.asset?._ref;
+      if (!ref) return;
+      const img = new Image();
+      img.src = urlForImage(ref).url();
+   });
+  }, [preloadingKey, allCommissionedData]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
