@@ -58,7 +58,7 @@ export default function CommissionedComponent({
                       className="w-full overflow-hidden"
                     >
                       <Link
-                        href={`/${project?.slug?.current}`}
+                        href={`/commissioned/${project?.slug?.current}`}
                         onMouseEnter={() => {
                           setHoveredImageTitle(project.title);
                         }}
