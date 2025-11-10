@@ -21,33 +21,6 @@ export default function ShopComponent({ shopData }: ShopDataProps) {
     return 0;
   });
 
-  const preloadingKey = useMemo(() => {
-    if (!shopData.length) return;
-      return shopData
-      .map((data) => {
-        const ref = data?.images.edges[0]?.node?.url;
-        if (!ref) return null;
-        try {
-          return urlForImage(ref).url();
-        } catch {
-          return null;
-        }
-      })
-      .filter(Boolean)
-      .join(".");
-  }, [allCommissionedData]);
-  
-
-  useEffect(() => {
-    if (!allCommissionedData?.length) return;
-      allCommissionedData.forEach((asset) => {
-      const ref = asset?.thumbnail?.asset?._ref;
-      if (!ref) return;
-      const img = new Image();
-      img.src = urlForImage(ref).url();
-   });
-  }, [preloadingKey, allCommissionedData]);
-
   const gridAnimationVariant = {
     hidden: { opacity: 0 },
     visible: (i: number) => ({
