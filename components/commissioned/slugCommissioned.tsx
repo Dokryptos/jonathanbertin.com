@@ -18,7 +18,7 @@ export default function SlugCommissionedComponent({
 
   const preloadingKey = useMemo(() => {
     if (!allCommissionedData?.length) return;
-      return allCommissionedData
+    return allCommissionedData
       .map((data) => {
         const ref = data?.thumbnail?.asset?._ref;
         if (!ref) return null;
@@ -31,16 +31,15 @@ export default function SlugCommissionedComponent({
       .filter(Boolean)
       .join(".");
   }, [allCommissionedData]);
-  
 
   useEffect(() => {
     if (!allCommissionedData?.length) return;
-      allCommissionedData.forEach((asset) => {
+    allCommissionedData.forEach((asset) => {
       const ref = asset?.thumbnail?.asset?._ref;
       if (!ref) return;
       const img = new Image();
       img.src = urlForImage(ref).url();
-   });
+    });
   }, [preloadingKey, allCommissionedData]);
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function SlugCommissionedComponent({
     <>
       <div
         ref={scrollRef}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none touch-pan-x"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none laptop:touch-pan-x touch-auto"
       >
         {slugProject?.gallery?.map((image, i: number) => (
           <div

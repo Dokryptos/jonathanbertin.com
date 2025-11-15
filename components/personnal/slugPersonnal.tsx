@@ -15,34 +15,34 @@ export default function SlugPersonnalComponent({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const slugProject = allPersonnalProjectData[0];
-  
-    const preloadingKey = useMemo(() => {
-      if (!allPersonnalProjectData?.length) return;
-  
-      return allPersonnalProjectData
-        .map((data) => {
-          const ref = data?.thumbnail?.asset?._ref;
-          if (!ref) return null;
-          try {
-            return urlForImage(ref).url();
-          } catch {
-            return null;
-          }
-        })
-        .filter(Boolean)
-        .join(".");
-    }, [allPersonnalProjectData]);
-  
-    useEffect(() => {
-      if (!allPersonnalProjectData?.length) return;
-  
-      allPersonnalProjectData.forEach((asset) => {
-        const ref = asset?.thumbnail?.asset?._ref;
-        if (!ref) return;
-        const img = new Image();
-        img.src = urlForImage(ref).url();
-      });
-    }, [preloadingKey, allPersonnalProjectData]);
+
+  const preloadingKey = useMemo(() => {
+    if (!allPersonnalProjectData?.length) return;
+
+    return allPersonnalProjectData
+      .map((data) => {
+        const ref = data?.thumbnail?.asset?._ref;
+        if (!ref) return null;
+        try {
+          return urlForImage(ref).url();
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .join(".");
+  }, [allPersonnalProjectData]);
+
+  useEffect(() => {
+    if (!allPersonnalProjectData?.length) return;
+
+    allPersonnalProjectData.forEach((asset) => {
+      const ref = asset?.thumbnail?.asset?._ref;
+      if (!ref) return;
+      const img = new Image();
+      img.src = urlForImage(ref).url();
+    });
+  }, [preloadingKey, allPersonnalProjectData]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
@@ -60,7 +60,7 @@ export default function SlugPersonnalComponent({
     <>
       <div
         ref={scrollRef}
-        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none touch-pan-x"
+        className="pt-[80px] desktop:pt-[96px] pb-[80px] desktop:pb-[96px] pl-5 pr-5 tablet:pr-2 flex flex-col h-full tablet:h-dvh tablet:flex-row tablet:overflow-x-auto tablet:overflow-y-hidden select-none laptop:touch-pan-x touch-auto"
       >
         {slugProject?.gallery?.map((image, i: number) => (
           <div
