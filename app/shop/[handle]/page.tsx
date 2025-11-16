@@ -3,6 +3,8 @@ import { PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify/fragments/product";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { ShopifyProduct } from "@/lib/shopify/types";
 
+export const revalidate = 0;
+
 export default async function ProcuctPage({
   params,
 }: {

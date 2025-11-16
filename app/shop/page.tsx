@@ -3,6 +3,8 @@ import { shopifyFetch } from "@/lib/shopify/client";
 
 import ShopComponent from "@/components/shop/index";
 
+export const revalidate = 0;
+
 export default async function ShopPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data = await shopifyFetch<{ products: { edges: any[] } }>(
